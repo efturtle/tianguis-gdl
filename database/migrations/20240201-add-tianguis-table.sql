@@ -1,6 +1,9 @@
 CREATE TABLE tianguis (
-  nombre VARCHAR(255),
-  ciudad VARCHAR(255),
-  fecha_creada TIMESTAMP DEFAULT now(),
-  fecha_actualizada TIMESTAMP
+	id UUID PRIMARY KEY,
+	nombre varchar(255) NOT NULL,
+	ciudad varchar(255),
+	empieza varchar(255) NOT NULL,
+	termina varchar(255) NOT NULL,
+	fecha_creada timestamp DEFAULT (datetime('now')),
+	fecha_actualizada timestamp DEFAULT (datetime('now'))
 );
