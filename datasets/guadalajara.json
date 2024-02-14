@@ -1,0 +1,1167 @@
+{
+    "lunes": [
+        {
+            "name": "5 DE MAYO",
+            "street1": "CUAHUATEMOC",
+            "street2": "TURQUÍA",
+            "street3": "PABLO VALDEZ",
+            "street4": "ESTEBAN ALATORRE"
+        },
+        {
+            "name": "BALCONES DE OBLATOS",
+            "street1": "BALCONES OBLATOS",
+            "street2": "HACIENDA LA ESTANCIA",
+            "street3": "HACIENDA IXCUINTLA",
+            "street4": "HACIENDA LA VENTA"
+        },
+        {
+            "name": "BETHEL",
+            "street1": "EL BETHEL",
+            "street2": "BETZAYDA",
+            "street3": "HACIENDA SAN RAMÓN",
+            "street4": "JERIMOTH"
+        },
+        {
+            "name": "CHAMPOTON",
+            "street1": "ATLAS",
+            "street2": "RÍO CUALE",
+            "street3": "CHAMPOTÓN",
+            "street4": "ARTÍCULO 123"
+        },
+        {
+            "name": "ECHEVERRÍA",
+            "street1": "ECHEVERRIA",
+            "street2": "MARÍA C. BANCALARI",
+            "street3": "PEDRO GARCÍA CONDE",
+            "street4": "JOSÉ ARRESE"
+        },
+        {
+            "name": "EL RETIRO",
+            "street1": "EL RETIRO",
+            "street2": "TORRES QUINTERO",
+            "street3": "RUBÍ",
+            "street4": "BRILLANTE"
+        },
+        {
+            "name": "EL ZALATE",
+            "street1": "EL ZALATE",
+            "street2": "AGUSTÍN ESCUDERO",
+            "street3": "SOR JUANA INÉS DE LA CRUZ",
+            "street4": "SALVADOR CORDERO"
+        },
+        {
+            "name": "FELIPE ANGELES",
+            "street1": "SAN ISIDRO",
+            "street2": "GUELATAO",
+            "street3": "FEDERACIÓN",
+            "street4": "FRANCISCO DE AYZA"
+        },
+        {
+            "name": "HDA DE GUADALUPE",
+            "street1": "OBLATOS",
+            "street2": "HACIENDA LA QUEMADA",
+            "street3": "HACIENDA LOS LAURELES",
+            "street4": "RONDALLA"
+        },
+        {
+            "name": "HORNOS",
+            "street1": "LA PAZ",
+            "street2": "HORNOS",
+            "street3": "REVOLUCIÓN",
+            "street4": "PIRAMIDE"
+        },
+        {
+            "name": "HUENTITÁN EL ALTO",
+            "street1": "HUENTITÁN EL ALTO",
+            "street2": "JOAQUÍN ROMERO",
+            "street3": "OTILIO GONZALEZ",
+            "street4": "PRIV. ARCEDIANO"
+        },
+        {
+            "name": "HUENTITÁN EL BAJO",
+            "street1": "HUENTITÁN EL BAJO",
+            "street2": "CALZADA INDEPENDENCIA",
+            "street3": "VOLCÁN TANCÍNTARO",
+            "street4": "VOLCÁN POPOCA"
+        },
+        {
+            "name": "LA LUNA",
+            "street1": "REVOLUCIONARIO MEZA",
+            "street2": "PEDRO MORENO",
+            "street3": "RAFAEL NAVARRO CORTINA",
+            "street4": "MEZQUITERA"
+        },
+        {
+            "name": "LA PAZ",
+            "street1": "LA PERLA",
+            "street2": "PABLO GUTIÉRREZ",
+            "street3": "JUAN DIAZ COVARRUBIAS",
+            "street4": "GENERAL SALAZAR"
+        },
+        {
+            "name": "LOMAS DEL PARAÍSO",
+            "street1": "LOMAS DEL PARAÍSO",
+            "street2": "RAFAEL CÁRDENAS",
+            "street3": "MARÍA LUISA MARTÍNEZ",
+            "street4": "EMILIANO ZAPATA"
+        },
+        {
+            "name": "LUIS MANUEL ROJAS",
+            "street1": "SAN ISIDRO",
+            "street2": "ABRAHAM GONZÁLEZ",
+            "street3": "PUERTO MELAQUE",
+            "street4": "SANTA CLEMENCIA"
+        },
+        {
+            "name": "MIRAVALLE",
+            "street1": "MIRAVALLE",
+            "street2": "FRAY ANGÉLICO",
+            "street3": "ARTES PLASTICAS",
+            "street4": "AV. DE LA ARQUITECTURA"
+        },
+        {
+            "name": "PALMA SOLA",
+            "street1": "18 DE MARZO",
+            "street2": "AMERICO VESPUCIO",
+            "street3": "FAJA DE ORO",
+            "street4": "PAPANTLA"
+        },
+        {
+            "name": "PLATÓN",
+            "street1": "INDEPENDENCIA",
+            "street2": "MONTE CARMELO",
+            "street3": "NORMALISTAS",
+            "street4": "MONTE SAN ELÍAS"
+        },
+        {
+            "name": "SAN FRANCISCO",
+            "street1": "TETLAN",
+            "street2": "MARÍA URIBE",
+            "street3": "GIGANTES",
+            "street4": "JOSÉ MARÍA VEREA"
+        },
+        {
+            "name": "SANTA ELENA",
+            "street1": "SANTA ELENA ALCALDE",
+            "street2": "BEJAR",
+            "street3": "VALENCIA",
+            "street4": "LINARES"
+        },
+        {
+            "name": "SANTA MARÍA",
+            "street1": "SANTA MARIA",
+            "street2": "ALVAREZ DEL CASTILLO",
+            "street3": "SANTA BEATRIZ",
+            "street4": "SAN ILDEFONSO"
+        },
+        {
+            "name": "ZARAGOZA",
+            "street1": "OLIMPICA",
+            "street2": "VIOLETA",
+            "street3": "RÍO BALSAS",
+            "street4": "CALZADA DEL EJÉRCITO"
+        }
+    ],
+    "martes": [
+        {
+            "name": "5 DE MAYO",
+            "street1": "JUAN BAUTISTA CEBALLOS",
+            "street2": "PEDRO GARCÍA CONDE",
+            "street3": "RAFAEL AGUIRRE"
+        },
+        {
+            "name": "ATLAS",
+            "street1": "RÍO OCOTLÁN",
+            "street2": "RÍO AMARILLO",
+            "street3": "RÍO AUTLÁN"
+        },
+        {
+            "name": "BATALLÓN DE S. PATRICIO",
+            "street1": "BATALLÓN DE SAN PATRICIO",
+            "street2": "CALZADA INDEPENDENCIA",
+            "street3": "MONTES URALES / SABIDURIA"
+        },
+        {
+            "name": "CERO",
+            "street1": "ECHEVERRIA",
+            "street2": "RAFAEL LOZADA",
+            "street3": "ALBERTO CORREA",
+            "street4": "ADOLFO CISNEROS"
+        },
+        {
+            "name": "EL MIRADOR",
+            "street1": "FRAY SERVANDO TERESA DE MIER",
+            "street2": "CALLE 38",
+            "street3": "CALLE 36"
+        },
+        {
+            "name": "FELIPE ANGELES",
+            "street1": "SAN ISIDRO",
+            "street2": "GUELATAO",
+            "street3": "FEDERACIÓN",
+            "street4": "FRANCISCO DE AYZA"
+        },
+        {
+            "name": "GÓNDOLA",
+            "street1": "FERROCARRIL",
+            "street2": "DE LA ESPUELA",
+            "street3": "AV. DE LAS GÓNDOLAS",
+            "street4": "CALLE 13"
+        },
+        {
+            "name": "HUENTITAN ZOOLOGICO",
+            "street1": "HUNENTITAN EL ALTO",
+            "street2": "VOLCÁN ACATENANGO",
+            "street3": "VOLCÁN COLIMA",
+            "street4": "VOLCÁN CAYAMBÉ"
+        },
+        {
+            "name": "HUITLACOCHE",
+            "street1": "MORELOS",
+            "street2": "HUITLACOCHE",
+            "street3": "PELICANO",
+            "street4": "GORRIÓN"
+        },
+        {
+            "name": "INSURGENTES",
+            "street1": "INSURGENTES",
+            "street2": "SOLEDAD CALLEJA",
+            "street3": "AURELIA GUEVARA",
+            "street4": "JOSÉ R. OSORIO"
+        },
+        {
+            "name": "LA GUADALUPANA",
+            "street1": "LA GUADALUPANA",
+            "street2": "FRANCISCO VERDÍN",
+            "street3": "AV. CIRCUNVALACIÓN",
+            "street4": "MANUEL MIMBELA"
+        },
+        {
+            "name": "LA LLAVE",
+            "street1": "BALCONES DE OBLATOS",
+            "street2": "HACIENDA LA CALERA",
+            "street3": "PLUTARCO ELÍAS CALLES",
+            "street4": "ANGEL ALBINO CORZO"
+        },
+        {
+            "name": "LAGUNITAS",
+            "street1": "LAGUNITAS",
+            "street2": "LAGUNITAS",
+            "street3": "JOSEFA ORTIZ DE DOMÍNGUEZ",
+            "street4": "GOMEZ DE MENDIOLA"
+        },
+        {
+            "name": "LÁZARO CÁRDENAS",
+            "street1": "LAZARO CARDENAS",
+            "street2": "JOSÉ MARÍA DE LA VEGA",
+            "street3": "CARLOS REYES AVILÉS",
+            "street4": "GERONIMO TREVIÑO"
+        },
+        {
+            "name": "MEZQUITÁN",
+            "street1": "MEZQUITAN",
+            "street2": "AV. FEDERALISMO",
+            "street3": "JOSÉ MARÍA VIGIL",
+            "street4": "AV. DE LOS MAESTROS"
+        },
+        {
+            "name": "POLANCO LICONSA",
+            "street1": "POLANQUITO",
+            "street2": "AV. 8 DE JULIO",
+            "street3": "CAYETANO ESTEVA",
+            "street4": "TEODOMIRO MANZANO"
+        },
+        {
+            "name": "PRESA OSORIO",
+            "street1": "LAGOS DE ORIENTE",
+            "street2": "CANAÁN",
+            "street3": "NAZARET",
+            "street4": "PRESA DEL LAUREL"
+        },
+        {
+            "name": "SAN ANTONIO",
+            "street1": "MODERNA",
+            "street2": "LÁZARO PÉREZ",
+            "street3": "ENRIQUE DIAZ DE LEÓN",
+            "street4": "PENITENCIARIA"
+        },
+        {
+            "name": "SAN ISIDRO",
+            "street1": "SAN ISIDRO",
+            "street2": "VERGEL 88",
+            "street3": "SAN ESTEBAN",
+            "street4": "SANTO TOMÁS"
+        },
+        {
+            "name": "SANTA EDUWIGES",
+            "street1": "SANTA EDUWIGES",
+            "street2": "BAHÍA",
+            "street3": "FARO",
+            "street4": "RIADA"
+        },
+        {
+            "name": "SANTA ELENA / TERUEL",
+            "street1": "SANTA ELENA DE LA CRUZ",
+            "street2": "TERUEL",
+            "street3": "GILBERTO RUVALCABA",
+            "street4": "LAMEGO"
+        },
+        {
+            "name": "SANTA FILOMENA",
+            "street1": "SANTA FILOMENA",
+            "street2": "FRESNO",
+            "street3": "PERDÍZ",
+            "street4": "CONDOR"
+        },
+        {
+            "name": "TALPITA",
+            "street1": "TALPITA",
+            "street2": "HACIENDA LOS BELENES",
+            "street3": "CASTELLANOS Y TAPIA",
+            "street4": "RIVAS GUILLÉN"
+        },
+        {
+            "name": "VILLA GUERRERO",
+            "street1": "VILLAGUERRERO",
+            "street2": "ISLAS HÉBRIDAS",
+            "street3": "AV. PATRIA",
+            "street4": "ISLA TRAPANI"
+        }
+    ],
+    "miercoles": [
+        {
+            "name": "AGUSTÍN DE LA ROSA",
+            "street1": "DEL SUR",
+            "street2": "COLOMBIA",
+            "street3": "SAN SALVADOR",
+            "street4": "HONDURAS"
+        },
+        {
+            "name": "ALCALDE",
+            "street1": "CENTRO",
+            "street2": "HERRERA Y CAIRO",
+            "street3": "LICEO",
+            "street4": "HUMBOLT"
+        },
+        {
+            "name": "BEATRIZ HERNÁNDEZ",
+            "street1": "BEATRIZ HERNANDEZ",
+            "street2": "M. GUTIÉRREZ",
+            "street3": "CONCEPCIÓN ALVAREZ",
+            "street4": "GAZA"
+        },
+        {
+            "name": "CAIRO",
+            "street1": "LOS ROMOS",
+            "street2": "EL CAIRO",
+            "street3": "DIONISIO RODRÍGUEZ",
+            "street4": "GÓMEZ DE MENDIOLA"
+        },
+        {
+            "name": "CALLE 50*",
+            "street1": "MEDRANO",
+            "street2": "CALLE 50",
+            "street3": "MEDRANO",
+            "street4": "GIGANTES"
+        },
+        {
+            "name": "CANAL 6",
+            "street1": "BELISARIO DOMINGUEZ",
+            "street2": "PUERTO PROGRESO",
+            "street3": "MONTE LA LUNA",
+            "street4": "PUERTO ALTATA"
+        },
+        {
+            "name": "ESMERIL",
+            "street1": "ALAMO INDUSTRIAL",
+            "street2": "ESMERIL",
+            "street3": "REFINERÍA",
+            "street4": "TALADRO"
+        },
+        {
+            "name": "FELIPE ANGELES",
+            "street1": "SAN ISIDRO",
+            "street2": "GUELATAO",
+            "street3": "FEDERACIÓN",
+            "street4": "FRANCISCO DE AYZA"
+        },
+        {
+            "name": "Huentián el Alto",
+            "street1": "HUENTITAN EL ALTO",
+            "street2": "ANTONIO LAGARRAÑAGA",
+            "street3": "PRIV. ANTONIO LARRAÑAGA",
+            "street4": "FERNANDO CALDERÓN"
+        },
+        {
+            "name": "JARDINES DE SAN JOSÉ",
+            "street1": "ISLA RAZA",
+            "street2": "ISLA SALOMÓN",
+            "street3": "ISLA ORCADAS",
+            "street4": "ISLA GOMERAS"
+        },
+        {
+            "name": "La Fábrica",
+            "street1": "SANTA ELENA ALCALDE",
+            "street2": "ANDRÉS QUINTANA ROO",
+            "street3": "FIDEL VELÁZQUEZ",
+            "street4": "IRENE ROBLEDO GARCÍA"
+        },
+        {
+            "name": "LOMAS DEL PARADERO",
+            "street1": "LOMAS DEL PARADERO",
+            "street2": "JOAQUÍN HERRERA",
+            "street3": "AV. RÍO NILO",
+            "street4": "MANUEL DE LA PEÑA"
+        },
+        {
+            "name": "MANUEL M. DIÉGUEZ",
+            "street1": "VILLASEÑOR",
+            "street2": "MANUEL M. DIÉGUEZ",
+            "street3": "JOSE MA. VIGIL",
+            "street4": "EULOGIO PARRA"
+        },
+        {
+            "name": "MARCOS MONTERO",
+            "street1": "LOMAS DEL PARADERO",
+            "street2": "MARCOS MONTERO",
+            "street3": "RÍO LA PAZ",
+            "street4": "MANZANO"
+        },
+        {
+            "name": "MIRAVALLE ACADEMIA",
+            "street1": "MIRAVALLE",
+            "street2": "HERMENEGILDO BUSTOS",
+            "street3": "AV. ACADEMIA",
+            "street4": "ARTES PLASTICAS / CALLE 1"
+        },
+        {
+            "name": "PANTENARIA",
+            "street1": "PANTENARIA",
+            "street2": "MILOS",
+            "street3": "ISLA PANTENARIA",
+            "street4": "ISLA DEL COCO"
+        },
+        {
+            "name": "PLUTARCO ELÍAS CALLES",
+            "street1": "BALCONES DE OBLATOS",
+            "street2": "AV. ARTESANOS",
+            "street3": "JOSÉ MA. NARVÁEZ",
+            "street4": "SAN PEDRO"
+        },
+        {
+            "name": "POLANCO",
+            "street1": "LOMAS DEPOLANCO",
+            "street2": "LONGINOS CADENA-CALLE 7",
+            "street3": "ALFONSO CAMACHO-CALLE 6",
+            "street4": "JOSÉ CARRILLO-CALLE 48"
+        },
+        {
+            "name": "RANCHO NUEVO",
+            "street1": "RANCHO NUEVO",
+            "street2": "SOTO Y GAMA",
+            "street3": "ALCÉRRECA",
+            "street4": "JUAN JOSÉ DE LA GARZA"
+        },
+        {
+            "name": "RIZO",
+            "street1": "ANALCO",
+            "street2": "FRANCISCO SILVA ROMERO",
+            "street3": "AV. REVOLUCIÓN",
+            "street4": "CUITLAHUAC"
+        },
+        {
+            "name": "San Juan de Ulúa",
+            "street1": "San Juan de Ulúa",
+            "street2": "SANJUAN DE ULÚA",
+            "street3": "MONTES DE OCA",
+            "street4": "MÁRTIRES IRLANDESES"
+        },
+        {
+            "name": "SAN JUDAS",
+            "street1": "COLINAS DE LA NORMAL",
+            "street2": "PASEO DE LOS FILÓSOFOS",
+            "street3": "PASEO DE LOS CIENTÍFICOS",
+            "street4": "DIEGO RIVERA"
+        },
+        {
+            "name": "SANTA CECILIA",
+            "street1": "SANTA CECILIA",
+            "street2": "HACIENDA LA COLMENA",
+            "street3": "ALFONSO ESPARZA",
+            "street4": "APOLONIO MORENO"
+        },
+        {
+            "name": "TETLÁN",
+            "street1": "TETLAN",
+            "street2": "GUINEA",
+            "street3": "GÓMEZ DE MENDIOLA",
+            "street4": "DOBLÓN"
+        }
+    ],
+    "jueves": [
+        {
+            "name": "18 DE MARZO",
+            "street1": "CRUZ DEL SUR",
+            "street2": "ISLA RAZA",
+            "street3": "ISLA ANTIGUA",
+            "street4": "ISLAS ORCADAS"
+        },
+        {
+            "name": "ABUNDANCIA",
+            "street1": "ABUNDANCIA",
+            "street2": "ABUNDANCIA",
+            "street3": "BELISARIO DOMÍNGUEZ",
+            "street4": "SAN ISIDRO"
+        },
+        {
+            "name": "CANTARRANAS",
+            "street1": "CANTARRANAS",
+            "street2": "RICARDO PALMERÍN",
+            "street3": "SAN ANDRÉS",
+            "street4": "ADRIAN PUGA"
+        },
+        {
+            "name": "FELIPE ANGELES",
+            "street1": "SAN ISIDRO",
+            "street2": "GUELATAO",
+            "street3": "FEDERACIÓN",
+            "street4": "FRANCISCO DE AYZA"
+        },
+        {
+            "name": "FRANCISCO VILLA",
+            "street1": "BLANCO Y CUELLAR",
+            "street2": "FCO. SARABIA-CALLE 74",
+            "street3": "MANUEL PAYNO",
+            "street4": "GÓMEZ DE MENDIOLA"
+        },
+        {
+            "name": "FRESNO",
+            "street1": "FRESNO",
+            "street2": "FRESNO",
+            "street3": "LIMÓN",
+            "street4": "OLMO"
+        },
+        {
+            "name": "HIGUERILLAS",
+            "street1": "HUIGUERILLAS",
+            "street2": "URBANO SAN ROMÁN",
+            "street3": "LITOGRAFÍA",
+            "street4": "IMPRENTA"
+        },
+        {
+            "name": "HUENTITÁN EL BAJO",
+            "street1": "HUENTITAN EL BAJO",
+            "street2": "VOLCÁN TOLIMAN",
+            "street3": "VOLCÁN ZACAPU",
+            "street4": "VOLCÁN POCHUTLA"
+        },
+        {
+            "name": "LA ANTENA",
+            "street1": "LOMAS DEL RIO VERDE",
+            "street2": "VENANCIO LEYVA",
+            "street3": "RAFAEL CAMPOY",
+            "street4": "HACIENDA JARDÍN"
+        },
+        {
+            "name": "LA CAPILLA",
+            "street1": "JESUS",
+            "street2": "JESÚS",
+            "street3": "ANGULO",
+            "street4": "GARIBALDI"
+        },
+        {
+            "name": "La Duraznera",
+            "street1": "LA DURAZNERA",
+            "street2": "ANTONIO NERI",
+            "street3": "JOSÉ ALCALÁ",
+            "street4": "LONGINOS CADENA"
+        },
+        {
+            "name": "LA NOGALERA",
+            "street1": "LA NOGALERA",
+            "street2": "MAÍZ",
+            "street3": "CÁRTAMO",
+            "street4": "CENTENO"
+        },
+        {
+            "name": "LA RAJADURA",
+            "street1": "OBLATOS",
+            "street2": "HACIENDA LA RAJADURA",
+            "street3": "JOAQUÍN AMARO",
+            "street4": "PLUTARCO ELÍAS CALLES"
+        },
+        {
+            "name": "PALOS",
+            "street1": "JARDINES DE LA CRUZ",
+            "street2": "NUEVO MUNDO",
+            "street3": "REYES CATÓLICOS",
+            "street4": "LA RÁBIDA"
+        },
+        {
+            "name": "PANTEÓN NUEVO",
+            "street1": "OBLATOS",
+            "street2": "JUAN DE DIOS ROBLEDO",
+            "street3": "MESA CENTRAL",
+            "street4": "MESA DEL NORTE"
+        },
+        {
+            "name": "POLANCO LICONSA",
+            "street1": "POLANQUITO",
+            "street2": "CAYETANO ESTEVA",
+            "street3": "AV. 8 DE JULIO",
+            "street4": "LAURA MÉNDEZ"
+        },
+        {
+            "name": "SAN ANDRÉS",
+            "street1": "SAN ANDRES",
+            "street2": "JOSÉ MARÍA VEREA",
+            "street3": "CHAMIZAL",
+            "street4": "DELGADILLO ARAUJO"
+        },
+        {
+            "name": "SAN BERNARDO",
+            "street1": "MEZQUITAN COUNTRY",
+            "street2": "GREGORIO DÁVILA",
+            "street3": "PLAN DE SAN LUIS",
+            "street4": "MAR ROJO"
+        },
+        {
+            "name": "SAN JORGE",
+            "street1": "VALLARTA SAN JORGE",
+            "street2": "AV. INGLATERRA",
+            "street3": "ESQUILO",
+            "street4": "PROL. SAN JORGE"
+        },
+        {
+            "name": "SANTA ANA",
+            "street1": "SANTA MARIA",
+            "street2": "EMILIANO ZAPATA",
+            "street3": "JOSÉ LUIS MORA",
+            "street4": "JOSÉ MARÍA LOZANO"
+        },
+        {
+            "name": "SANTA ELENA",
+            "street1": "SANTA ELENA ESTADIO",
+            "street2": "CADIZ",
+            "street3": "AV. PATRIA",
+            "street4": "ESTORIL"
+        },
+        {
+            "name": "Santa Filomena",
+            "street1": "SANTA FILOMENA",
+            "street2": "FRESNO",
+            "street3": "PERDÍZ",
+            "street4": "CONDOR"
+        },
+        {
+            "name": "SECUNDINA GALLO",
+            "street1": "SECUNDINA GALLO",
+            "street2": "SECUNDINA GALLO",
+            "street3": "MEDRANO",
+            "street4": "EUROPA"
+        },
+        {
+            "name": "SIERRA NEVADA",
+            "street1": "MONUMENTAL",
+            "street2": "SIERRA NEVADA",
+            "street3": "FRATERNIDAD",
+            "street4": "MESA CENTRAL"
+        },
+        {
+            "name": "VICENTE FERNÁNDEZ",
+            "street1": "SAN MIGUEL DE HUENTITAN",
+            "street2": "JOSÉ PABLO MONCAYO",
+            "street3": "HIGINIO RUVALCABA",
+            "street4": "LUIS ALCARAZ"
+        }
+    ],
+    "viernes": [
+        {
+        "name": "Alamo",
+        "street1": "ALAMO INDUSTRIAL",
+        "street2": "METALURGIA",
+        "street3": "TOLVA",
+        "street4": "FRESADORA"
+        },
+        {
+        "name": "Arboledas",
+        "street1": "NUEVA ESPAÑA",
+        "street2": "JACARANDA",
+        "street3": "MANGLE",
+        "street4": "MORERA"
+        },
+        {
+        "name": "AYUNTAMIENTO",
+        "street1": "ANALCO",
+        "street2": "ANTONIO BRAVO",
+        "street3": "ANALCO",
+        "street4": "NARDO"
+        },
+        {
+        "name": "BEATRIZ HERNÁNDEZ",
+        "street1": "BEATRIZ HENANDEZ",
+        "street2": "MANUEL CERVANTES",
+        "street3": "PEDRO VELEZ",
+        "street4": "SANTIAGO DE GUZMÁN"
+        },
+        {
+        "name": "CALLE 66",
+        "street1": "BLANCO Y CUELLAR",
+        "street2": "CALLE 66",
+        "street3": "ARTES",
+        "street4": "ALVARO OBREGÓN"
+        },
+        {
+        "name": "CERRO VIEJO",
+        "street1": "LOMAS INDEPENDENCIA",
+        "street2": "CERRO VIEJO",
+        "street3": "LOS ANDES",
+        "street4": "MONTE ATHOS"
+        },
+        {
+        "name": "CORRECCIONAL",
+        "street1": "CORRECCIONAL",
+        "street2": "NIQUEL",
+        "street3": "MINAS DEL AMPARO",
+        "street4": "MIGUEL ALVAREZ"
+        },
+        {
+        "name": "EL ZALATE",
+        "street1": "EL ZALATE",
+        "street2": "LUIS VELASCO",
+        "street3": "BETZAYDA",
+        "street4": "ELIGIO ANCONA"
+        },
+        {
+        "name": "ESMIRNA",
+        "street1": "CUAHUTEMOC",
+        "street2": "ESMIRNA",
+        "street3": "PABLO VALDEZ",
+        "street4": "PUERTO MELAQUE"
+        },
+        {
+        "name": "FELIPE ANGELES",
+        "street1": "SAN ISIDRO",
+        "street2": "GUELATAO",
+        "street3": "FEDERACIÓN",
+        "street4": "FRANCISCO DE AYZA"
+        },
+        {
+        "name": "FERROCARRILES",
+        "street1": "FERROCARRILES",
+        "street2": "CALLE 12",
+        "street3": "CALLE 9",
+        "street4": "CALLE 7"
+        },
+        {
+        "name": "HISTORIADORES",
+        "street1": "HISTORIADORES",
+        "street2": "GRAL. MIGUEL MONDRAGÓN",
+        "street3": "JOSÉ MA. MARROQUÍ",
+        "street4": "PEDRO GONZALO"
+        },
+        {
+        "name": "INSURGENTES",
+        "street1": "INSURGENTES",
+        "street2": "HILARIA RÍOS",
+        "street3": "ALFREDO CARRASCO",
+        "street4": "MEDRANO"
+        },
+        {
+        "name": "LA CALERA",
+        "street1": "LA CALERA",
+        "street2": "HACIENDA LA CALERA",
+        "street3": "CALZADA DEL OBRERO",
+        "street4": "ANGEL ALBINO CORZO"
+        },
+        {
+        "name": "MAESTROS",
+        "street1": "MEZQUITAN COUNTRY",
+        "street2": "CABILDO",
+        "street3": "ALFREDO R. PLASCENCIA",
+        "street4": "PEDRO BUZETA"
+        },
+        {
+        "name": "MELCHOR MUZQUIZ",
+        "street1": "LOMAS DEL PARADERO",
+        "street2": "MELCHOR MUZQUIZ",
+        "street3": "JUSTO CORRO",
+        "street4": "AV. PRESIDENTES"
+        },
+        {
+        "name": "Polanco Liconsa",
+        "street1": "POLANQUITO",
+        "street2": "AV. 8 DE JULIO",
+        "street3": "CAYETANO ESTEVA",
+        "street4": "TEODOMIRO MANZANO"
+        },
+        {
+        "name": "SAGRADA FAMILIA",
+        "street1": "JESUS",
+        "street2": "CRUZ VERDE",
+        "street3": "EULOGIO PARRA",
+        "street4": "FRANCISCO ZARCO"
+        },
+        {
+        "name": "SAN ISIDRO",
+        "street1": "SAN ISIDRO",
+        "street2": "INDUSTRIA",
+        "street3": "HUERTAS",
+        "street4": "LAGUNITAS"
+        }
+    ],
+    "sabado": [
+        {
+            "name": "BALCONES DE OBLATOS",
+            "street1": "BALCONES DE OBLATOS",
+            "street2": "HACIENDA CHILA",
+            "street3": "HACIENDA LA GUARACHA",
+            "street4": "HACIENDA LA AURORA"
+        },
+        {
+            "name": "Batallón de Atenquique",
+            "street1": "FLORES MAGON",
+            "street2": "BATALLÓN DE ATENQUIQUE",
+            "street3": "BATALLÓN DE S. PATRICIO",
+            "street4": "COMBATE DE SACRAMENTO"
+        },
+        {
+            "name": "CHIHUAHUA",
+            "street1": "LA GUADALUPANA",
+            "street2": "FRANCISCO TEJEDA",
+            "street3": "PRIV. FRANCISCO TEJEDA",
+            "street4": "PRIV. CHIHUAHUA"
+        },
+        {
+            "name": "EL AVIÓN",
+            "street1": "EL CARMEN",
+            "street2": "AV. DE LOS AHUEHUETES",
+            "street3": "JOSÉ MA. CASTILLERO",
+            "street4": "RICARDO PALACIOS"
+        },
+        {
+            "name": "EL SAUZ",
+            "street1": "EL SAUZ",
+            "street2": "ISLA HÉBRIDAS",
+            "street3": "AV. JAIME TORRES BODET",
+            "street4": "AV. PATRIA"
+        },
+        {
+            "name": "FELIPE ANGELES",
+            "street1": "SAN ISIDRO",
+            "street2": "GUELATAO",
+            "street3": "FEDERACIÓN",
+            "street4": "FRANCISCO DE AYZA"
+        },
+        {
+            "name": "FRESADORA",
+            "street1": "QUINTA VELARDE",
+            "street2": "RÍO AMACUZAC",
+            "street3": "RÍO NILO",
+            "street4": "CALZADA OLÍMPICA"
+        },
+        {
+            "name": "GÓMEZ FARÍAS",
+            "street1": "GOMEZ FARIAS",
+            "street2": "JOSÉ ESCOBAR",
+            "street3": "JOSÉ CORNEJO",
+            "street4": "GENARO GARCÍA"
+        },
+        {
+            "name": "GUACAMAYA",
+            "street1": "FRESNO",
+            "street2": "GUACAMAYO",
+            "street3": "PICHÓN",
+            "street4": "URRACA"
+        },
+        {
+            "name": "Guillermo Prieto",
+            "street1": "BENITO JUAREZ",
+            "street2": "PESO",
+            "street3": "AV. PRESA LAUREL",
+            "street4": "GUINEA"
+        },
+        {
+            "name": "IMPRENTA",
+            "street1": "HIGUERILLAS",
+            "street2": "IMPRENTA",
+            "street3": "MARIANO RODRÍGUEZ",
+            "street4": "JOSÉ IGINEZ"
+        },
+        {
+            "name": "INFONAVIT ESTADIO",
+            "street1": "RESIDENCIAL SAN ELIAS",
+            "street2": "SIERRA DE COMANJA",
+            "street3": "MONTE ROSAS",
+            "street4": "MONTE GALERA"
+        },
+        {
+            "name": "La 60",
+            "street1": "TALPITA",
+            "street2": "CALLE 60",
+            "street3": "SAN ESTEBAN",
+            "street4": "SANTA CLEMENCIA"
+        },
+        {
+            "name": "LA 70",
+            "street1": "POPULAR",
+            "street2": "CALLE 70",
+            "street3": "SAN PABLO",
+            "street4": "SANTO TOMÁS"
+        },
+        {
+            "name": "La 72",
+            "street1": "INDUSTRIA",
+            "street2": "CALLE 72",
+            "street3": "DIONISIO RODRÍGUEZ",
+            "street4": "PEDRO MA. ANAYA"
+        },
+        {
+            "name": "LA CONCHA",
+            "street1": "SAN JUAN DE DIOS",
+            "street2": "CHURUBUSCO",
+            "street3": "ALVARO OBREGÓN",
+            "street4": "DIONISIO RODRÍGUEZ"
+        },
+        {
+            "name": "LAGOS DE ORIENTE",
+            "street1": "LAGOS DE ORIENTE",
+            "street2": "CONGRESO",
+            "street3": "NUBIA",
+            "street4": "JOSÉ GÓMEZ DE LA CORTINA"
+        },
+        {
+            "name": "LEGALIDAD",
+            "street1": "PARQUES INDEPENDENCIA",
+            "street2": "LEGALIDAD",
+            "street3": "CALZADA INDEPENDENCIA",
+            "street4": "CLÍO"
+        },
+        {
+            "name": "LOMAS DE ATEMAJAC",
+            "street1": "LOMAS DE ATEMAJAC",
+            "street2": "FIDEL VELÁZQUEZ SÁNCHEZ",
+            "street3": "ENRIQUE DÍAZ DE LEÓN",
+            "street4": "CHETUMAL"
+        },
+        {
+            "name": "MOCHITILTIC",
+            "street1": "BALCONES DE OBLATOS",
+            "street2": "HACIENDA MOCHITILTIC",
+            "street3": "HACIENDA DE TALA",
+            "street4": "HACIENDA SANTIAGO"
+        },
+        {
+            "name": "POLANQUITO",
+            "street1": "POLANQUITO",
+            "street2": "JESÚS REYES HEROLES",
+            "street3": "RAFAEL MOLINA",
+            "street4": "FELIPE LÓPEZ"
+        },
+        {
+            "name": "SAN JUAN BOSCO",
+            "street1": "SAN JUAN BOSCO",
+            "street2": "IGNACIO MACHAIN-CALLE 60",
+            "street3": "MANUEL PAYNO",
+            "street4": "REPÚBLICA"
+        },
+        {
+            "name": "SAN VICENTE",
+            "street1": "SANTA ROSA",
+            "street2": "PUERTO DEL CARMEN",
+            "street3": "SAN PÍO",
+            "street4": "IGUALDAD"
+        }
+    ],
+    "domingo": [
+        {
+            "name": "5 de Mayo",
+            "street1": "MIRAVALLE",
+            "street2": "JUAN CORDERO",
+            "street3": "JOSÉ MA. SOLÍS",
+            "street4": "PATRIA"
+        },
+        {
+            "name": "AGUA AZUL",
+            "street1": "SAN MARCOS",
+            "street2": "NICOLÁS REGULES",
+            "street3": "CONSTITUYENTES",
+            "street4": "ESPAÑA"
+        },
+        {
+            "name": "AGUSTÍN DE LA ROSA",
+            "street1": "DEL SUR",
+            "street2": "COLOMBIA",
+            "street3": "SAN SALVADOR",
+            "street4": "HONDURAS"
+        },
+        {
+            "name": "BARATILLO",
+            "street1": "OLIMPICA",
+            "street2": "CALLE 38",
+            "street3": "GIGANTES",
+            "street4": "PUERTO MELAQUE/JUAN PABLO II"
+        },
+        {
+            "name": "BEATRIZ HERNÁNDEZ",
+            "street1": "BEATRIZ HERNANDEZ",
+            "street2": "GAZA",
+            "street3": "PEDRO SÁNCHEZ",
+            "street4": "PROLONGACIÓN DEMÓSTENES"
+        },
+        {
+            "name": "C.T.M. LA LOMA",
+            "street1": "CTM LA LOMA",
+            "street2": "MIGUEL NORIEGA",
+            "street3": "JOSÉ ACEVES POZOS",
+            "street4": "MIGUEL URIBE"
+        },
+        {
+            "name": "CADIZ",
+            "street1": "SANTA ELENA ESTADIO",
+            "street2": "CADIZ",
+            "street3": "IRENE ROBLEDO",
+            "street4": "ÉVORA"
+        },
+        {
+            "name": "CALLE 40",
+            "street1": "OLIMPICA",
+            "street2": "CORREGIDORA- CALLE 40",
+            "street3": "AV. REVOLUCIÓN",
+            "street4": "MARCELINO G. BARRAGÁN"
+        },
+        {
+            "name": "CALLE 62",
+            "street1": "SAN JUAN BOSCO",
+            "street2": "CALLE 62",
+            "street3": "JOSEFA ORTIZ DE DOMÍNGUEZ",
+            "street4": "GÓMEZ DE MENDIOLA"
+        },
+        {
+            "name": "CANTERA",
+            "street1": "SAN MARCOS",
+            "street2": "PUERTO ANGEL",
+            "street3": "MONTE LA LUNA",
+            "street4": "PUERTO ENSENADA"
+        },
+        {
+            "name": "FELIPE ANGELES",
+            "street1": "SAN ISIDRO",
+            "street2": "GUELATAO",
+            "street3": "FEDERACIÓN",
+            "street4": "FRANCISCO DE AYZA"
+        },
+        {
+            "name": "HERRERA Y CAIRO",
+            "street1": "ARTESANOS",
+            "street2": "HACIENDA SANTIAGO",
+            "street3": "HACIENDA LA QUEMADA",
+            "street4": "AV. ARTESANOS"
+        },
+        {
+            "name": "HUENTITÁN EL BAJO",
+            "street1": "HUENTITAN EL BAJO",
+            "street2": "VOLCÁN TOLIMAN",
+            "street3": "VOLCÁN ZACAPU",
+            "street4": "VOLCÁN ANTUCO"
+        },
+        {
+            "name": "La 74",
+            "street1": "LA NOPALERA",
+            "street2": "CALLE 74",
+            "street3": "ARTES",
+            "street4": "EUROPA"
+        },
+        {
+            "name": "LA NORMAL",
+            "street1": "LA NORMAL",
+            "street2": "MAGISTERIO",
+            "street3": "MARIANO BÁRCENAS",
+            "street4": "AV. AVILA CAMACHO"
+        },
+        {
+            "name": "Las Vías",
+            "street1": "MIRAVALLE",
+            "street2": "AV. ARQUITECTURA",
+            "street3": "AV. GOBERNADOR CURIEL",
+            "street4": "CEREZOS"
+        },
+        {
+            "name": "Lomas del Gallo",
+            "street1": "LOMAS DEL GALLO",
+            "street2": "SUCRE",
+            "street3": "JOSÉ HERNÁNDEZ",
+            "street4": "SALARIO"
+        },
+        {
+            "name": "LOMAS DEL PARAÍSO",
+            "street1": "LOMAS DEL PARAISO",
+            "street2": "JOSÉ MA. SÁNCHEZ",
+            "street3": "EUSTAQUIO ARIAS",
+            "street4": "BERNARDO GUTIÉRREZ"
+        },
+        {
+            "name": "MANUEL CAMBRE",
+            "street1": "SANTA TERESITA",
+            "street2": "NICOLÁS ROMERO",
+            "street3": "MANUEL ACUÑA",
+            "street4": "MANUEL ASPIROZ"
+        },
+        {
+            "name": "MARGARITA MAZA DE J.",
+            "street1": "MTA. MAZA DE JUAREZ",
+            "street2": "ANTONIO SALANUEVA",
+            "street3": "AMADO GUADARRAMA",
+            "street4": "MANUEL GUTIÉRREZ"
+        },
+        {
+            "name": "PESO",
+            "street1": "TETLAN",
+            "street2": "PESO",
+            "street3": "AV. PRESA LAUREL",
+            "street4": "GUINEA"
+        },
+        {
+            "name": "POLANCO",
+            "street1": "LOMAS DE POLANCO",
+            "street2": "LONGINOS CADENA-CALLE 7",
+            "street3": "ALFONSO CAMACHO-CALLE 6",
+            "street4": "JOSÉ CARRILLO-CALLE 48"
+        },
+        {
+            "name": "RANCHO NUEVO",
+            "street1": "RANCHO NUEVO",
+            "street2": "MARTÍN GONZÁLEZ",
+            "street3": "AV. SOTO Y GAMA",
+            "street4": "MARIANO BALLEZA"
+        },
+        {
+            "name": "Río Lagos",
+            "street1": "OLIMPICA",
+            "street2": "RÍO VOLGA",
+            "street3": "RÍO RHÍN",
+            "street4": "RÍO TÁMESIS"
+        },
+        {
+            "name": "SANTA TERESITA",
+            "street1": "VILLASEÑOR",
+            "street2": "RAMOS MILLÁN",
+            "street3": "ANGULO",
+            "street4": "HOSPITAL"
+        },
+        {
+            "name": "SUCRE",
+            "street1": "TETLAN",
+            "street2": "SUCRE",
+            "street3": "GUARANÍ",
+            "street4": "AHORRO"
+        },
+        {
+            "name": "TETLÁN",
+            "street1": "TETLAN",
+            "street2": "TERESA REYNOSO",
+            "street3": "LEONOR PINTADO",
+            "street4": "JOSEFA MENDOZA"
+        }        
+    ]
+}
