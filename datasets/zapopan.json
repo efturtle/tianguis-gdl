@@ -1,0 +1,552 @@
+{
+    "lunes": [
+        {
+            "name":"Altagracia",
+            "direccion": "Av. Ind. Textil entre Agave y Torre Vieja"
+        },
+        {
+            "name":"Balcones de la Cantera",
+            "direccion": "Cantera Blanca entre Brillante y Plata."
+        },
+        {
+            "name":"Balcones del Sol (ó Balcones del Colli)",
+            "direccion": "Lima, entre Mezquite y Galeana"
+        },
+        {
+            "name":"Cajetes, Los",
+            "direccion": "Av. Las Torres entre San Francisco y San Jose"
+        },
+        {
+            "name":"Ciudad Granja",
+            "direccion": "Calzada de los Paraísos entre C. De las Palmas y C. Laureles"
+        },
+        {
+            "name":"Girasoles",
+            "direccion": "Santa Lucrecia de Santa Mercedes a Av. Acueducto"
+        },
+        {
+            "name":"Jardines de la Patria",
+            "direccion": "Inglaterra entre Giovanni Pappini y Shakespeare"
+        },
+        {
+            "name":"Mante, El",
+            "direccion": "Calle Michoacan y Av. Jalisco"
+        },
+        {
+            "name":"Mesa de los Ocotes",
+            "direccion": "Jitomate entre Tomate y Frijol"
+        },
+        {
+            "name":"Palmira",
+            "direccion": " Av. Palmira"
+        },
+        {
+            "name":"Paseos del Sol",
+            "direccion": "Lateral Periferico y Peñorada"
+        },
+        {
+            "name":"Prados de Santa Lucia",
+            "direccion": "Chapultepec, ente Vicente Suarez y Juan Escutia"
+        },
+        {
+            "name":"Primavera, La",
+            "direccion": "Leona Vicario, entre Av. La Paz e Ignacio Allende"
+        },
+        {
+            "name":"San Isidro Ejidal",
+            "direccion": "Francisco Sarabia entre Libertad y Lucio Blanco"
+        },
+        {
+            "name":"Santa Margarita 2da Sección",
+            "direccion": "Santa Lucrecia entre Santa Mercedes y Santa Monica"
+        },
+        {
+            "name":"Santa Mónica de los Chorritos",
+            "direccion": "Chapultepec entre Hidalgo y 16 de septiembre."
+        },
+        {
+            "name":"Venta del Astillero",
+            "direccion": "E. Zapata entre M. García y J. Gil Preciado."
+        }
+    ],
+    "martes" : [
+        {
+            "name": "Arenales Tapatíos",
+            "direccion":"Mica entre Mercurio y Arroyo"
+        },
+        {
+            "name": "Benito Juárez",
+            "direccion":"Javier Rojo Gomez entre Carretera a Saltillo y Zapotlan"
+        },
+        {
+            "name": "Campanario, El",
+            "direccion":"San Isidro entre San Jose y Javier "
+        },
+        {
+            "name": "Colli CTM",
+            "direccion":"Fuera de la Explanada del Centro Social, por Felipe Carrillo Puerto y Andador sin Nombre"
+        },
+        {
+            "name": "Colli Poblado (ó Colli Ejidal)",
+            "direccion":"Volcán Fujiyama"
+        },
+        {
+            "name": "Colli Urbano",
+            "direccion":"Volcan Fujiyama entre Iturbide y Vol. Ajusco"
+        },
+        {
+            "name": "Hogares",
+            "direccion":"Lázaro Cárdenas y Zapotlán"
+        },
+        {
+            "name": "Juan Manuel Vallarta",
+            "direccion":"Av. Inglaterra entre Libra y Escorpion"
+        },
+        {
+            "name": "Mesa Colorada",
+            "direccion":"Vista hermosa entre Vista Campestre y Buena Vista"
+        },
+        {
+            "name": "Residencial Cordilleras",
+            "direccion":"H. Berlioz entre Av. Patria y George Haendel"
+        },
+        {
+            "name": "Santa Margarita 1ra. Sección",
+            "direccion":"Santa Ana  entre Torres y Santa Cecilia."
+        },
+        {
+            "name": "Santa Margarita 2da Sección",
+            "direccion":"Santa Ana entre Santa Mrgarita y Santa Alicia"
+        },
+        {
+            "name": "Santa Maria del Pueblito",
+            "direccion":"Guadalupe Victoria"
+        },
+        {
+            "name": "Tabachines",
+            "direccion":"Paseo de las Galateas entre Paseo de los Bambues y Paseo de los Granados"
+        },
+        {
+            "name": "Tepeyac",
+            "direccion":"Morelos entre Aurelio Ortega y Laureles"
+        },
+        {
+            "name": "Unidad Gustavo Díaz Ordaz",
+            "direccion":"Av. Las Fuentes entre Tuxtla y S. Mazamitla."
+        },
+        {
+            "name": "Víctor Hugo",
+            "direccion":"Calle Victoriano Núñez"
+        },
+        {
+            "name": "Vigusa (La Vidriera)",
+            "direccion":"Av. Inglaterrra entre Av. México y Sagitario"
+        },
+        {
+            "name": "Vista Hermosa",
+            "direccion":"Vista Hermosa entre Vista Campestre y Buena Vista"
+        }
+    ],
+    "miercoles": [
+        {
+            "name": "Agrícola, La",
+            "direccion": "Gladiola entre Obelisco y Jazmín"
+        },
+        {
+            "name": "Águilas, Las",
+            "direccion": "Montemorelos entre Proongacion Navio y Cruz del sur"
+        },
+        {
+            "name": "Arcos de Zapopan",
+            "direccion": "A. Valentino y A. Constantino"
+        },
+        {
+            "name": "Arroyo Hondo 1ra. Sección",
+            "direccion": "Prolongación Federalismo"
+        },
+        {
+            "name": "Floresta del Colli, La",
+            "direccion": "Calle Bugambilias y Amapola"
+        },
+        {
+            "name": "Garabato, El",
+            "direccion": "Prolongación José López Portillo y Tepeyac"
+        },
+        {
+            "name": "Indígena de Mezquitán",
+            "direccion": "Niños Heroes y Josefa Ortiz de Dominguez"
+        },
+        {
+            "name": "Ixcatán Poblado",
+            "direccion": "Por Vicente Guerrero, en la plaza"
+        },
+        {
+            "name": "Jardines del Ixtépete",
+            "direccion": "Prolongación Tepeyac entre Padros del Ixtepete y Cerrada Prolongación Tepeyac"
+        },
+        {
+            "name": "Lomas Universidad",
+            "direccion": "Av. Novelistas entre Mabuse y Gabrielle D' Anunzio"
+        },
+        {
+            "name": "Mesa de los Ocotes",
+            "direccion": "Paseo de los Guayabos y Paseo de los Ocotes"
+        },
+        {
+            "name": "Miramar",
+            "direccion": "Puerto Batabampo entre Puerto Guaymas y Puerto Tampico"
+        },
+        {
+            "name": "Parques del Auditorio",
+            "direccion": "Prol. Federalismo Nte. entre Tratado de Tlalteloco y Gtez. Gallo"
+        },
+        {
+            "name": "Residencial Moctezuma",
+            "direccion": "Av. Copernico y Av. Moctezuma"
+        },
+        {
+            "name": "San Juan de Ocotán",
+            "direccion": "Juárez entre Independencia y Venustiano Carranza"
+        },
+        {
+            "name": "Tesistán",
+            "direccion": "Libertad entre San Francisco y Melchor Ocampo"
+        },
+        {
+            "name": "Unidad Auditorio",
+            "direccion": "Federalismo y Club Atlas"
+        },
+        {
+            "name": "Redidencial Plaza Guadalupe",
+            "direccion": "Av. Moztezuma"
+        }
+    ],
+    "jueves": [
+        {
+            "name": "Bóvedas, Las,",
+            "direccion": "Azaleas entre Santa Margarita y San Marcos"
+        },
+        {
+            "name": "Ciudad Granja,",
+            "direccion": "Cincurvalación Pte. entre C. Del Fresno y Paraísos"
+        },
+        {
+            "name": "Colinas de la Primavera,",
+            "direccion": "Jacarandas"
+        },
+        {
+            "name": "Constitución,",
+            "direccion": "Constituyentes entre Manuel M. Dieguez y Gral. Aguirre"
+        },
+        {
+            "name": "Coronilla, La,",
+            "direccion": "Ramon Lopez Velarde"
+        },
+        {
+            "name": "Emiliano Zapata,",
+            "direccion": "Curtidores entre Carpinteros y Campesinos"
+        },
+        {
+            "name": "Francisco Sarabia,",
+            "direccion": "Francisco Villa entre Hernan Cortes, Allende y Carretera a Santa Ana"
+        },
+        {
+            "name": "Gusa,",
+            "direccion": "Aldama hasta la glorieta por calle la Gusa"
+        },
+        {
+            "name": "Hacienda la Mora,",
+            "direccion": "Azaleas entre Santa Margarita y San Marcos"
+        },
+        {
+            "name": "Huerta, La,",
+            "direccion": "Constituyentes, entre Alfonso Gravioto y Pablo Quiroga."
+        },
+        {
+            "name": "Lomas de la Primavera,",
+            "direccion": "Flor de Castilla"
+        },
+        {
+            "name": "Mesa Colorada Poniente,",
+            "direccion": "A. Indigena y Calle Delli"
+        },
+        {
+            "name": "Miguel Hidalgo,",
+            "direccion": "Piedras Negras"
+        },
+        {
+            "name": "Nextipac,",
+            "direccion": "Juárez"
+        },
+        {
+            "name": "Nuevo Vergel,",
+            "direccion": "Curtidores entre Carpinteros y Campesinos"
+        },
+        {
+            "name": "Paraísos del Colli,",
+            "direccion": "Nogal entre Prolongacion Tepeyac y Vol. Quinceo"
+        },
+        {
+            "name": "Prados Vallarta,",
+            "direccion": "Santa Catalina de Siena entre Santa Rosa de Lima y L. Cardenas"
+        },
+        {
+            "name": "Santa Paula,",
+            "direccion": "Constituyentes hasta la glorieta por la calle Gusa."
+        },
+        {
+            "name": "Zapote, El,",
+            "direccion": "Tajin entre Xochitl y Sayil"
+        }
+    ],
+    "viernes": [
+        {
+            "name": "Arcos de Zapopan,",
+            "direccion": "Arco Pertinax entre Arco del Triunfo y Arco Druso"
+        },
+        {
+            "name": "Atemajac del Valle,",
+            "direccion": "Granaditos, (Experiencia), entre Cuitlahuac y E. Zapata"
+        },
+        {
+            "name": "Briseño, El,",
+            "direccion": "Santa Ana entre Colonos Unidos y Lopez Portillo"
+        },
+        {
+            "name": "Colinas de los Robles,",
+            "direccion": "Ahuehuetes"
+        },
+        {
+            "name": "Constituyentes,",
+            "direccion": "Paseo de las Caobas"
+        },
+        {
+            "name": "Copala,",
+            "direccion": "Calle López Mateos"
+        },
+        {
+            "name": "Húmedo de Nextipac, El,",
+            "direccion": "Río Amazonas"
+        },
+        {
+            "name": "Jardines del Auditorio,",
+            "direccion": "Mariano Barcenas entre Luis Quintero y M Hndez"
+        },
+        {
+            "name": "Jardines Vallarta,",
+            "direccion": "Av. Inglaterra entre Gabriel García Marquez y Juan Palomar y Arias"
+        },
+        {
+            "name": "Lomas de Zapopan,",
+            "direccion": "Arco Pertinax entre A. Triunfo y A. Drusco"
+        },
+        {
+            "name": "Mariano Otero,",
+            "direccion": "Lateral Mariano Otero entre Cuarzo y Sienita"
+        },
+        {
+            "name": "Residencial Plaza Guadalupe,",
+            "direccion": "Av. Moctezuma"
+        },
+        {
+            "name": "Rinconada del Auditorio,",
+            "direccion": "Mariano Barcenas"
+        },
+        {
+            "name": "San Isidro Ejidal,",
+            "direccion": "Cuitlahuac entre Colon y Av. del Corral"
+        },
+        {
+            "name": "Tabachines,",
+            "direccion": "Paseo de las Caobas entre Paseo de los Huejotes , Frambuesos y Tabachines"
+        },
+        {
+            "name": "Vigía, El,",
+            "direccion": "Cuitlahuac entre Colon y Av. del Corral"
+        },
+        {
+            "name": "Villa, La,",
+            "direccion": "Cuitlahuac entre Colon y Av. del Corral"
+        }
+    ],
+    "sabado": [
+        {
+            "name": "Agrícola, La",
+            "direccion":"Hortencia entre Camino a Santa Ana y Tulipán"
+        },
+        {
+            "name": "Alameda de Tesistán",
+            "direccion":"Jardines de los Jazmines"
+        },
+        {
+            "name": "Arenales Tapatíos",
+            "direccion":"Cobre entre Mercurio y Platino"
+        },
+        {
+            "name": "Carlos Rivera Aceves",
+            "direccion":"Cobre, entre Centenario y Mercurio"
+        },
+        {
+            "name": "Colli CTM",
+            "direccion":"Av. El Colli, de Cordilleras a Av. Copèrnico"
+        },
+        {
+            "name": "Colli Urbano ",
+            "direccion":"El Colli entre Copernico y Vol. Cotopaxi"
+        },
+        {
+            "name": "Experiencia, la",
+            "direccion":"Ma. Teresa Campirano entre Imperio y A. Serdan y Por A. Serdan entre Jesús Martínez Y Lazaro Cárdenas"
+        },
+        {
+            "name": "Hogares",
+            "direccion":"Arandas y Zapotlán"
+        },
+        {
+            "name": "Jardines de Nuevo México",
+            "direccion":"3a Oriente entre Tesistán y 8a Sur"
+        },
+        {
+            "name": "Lomas del Refugio",
+            "direccion":"Chapala, de Teocaltiche a Lagos de Moreno"
+        },
+        {
+            "name": "Martinica, La",
+            "direccion":"Hidalgo entre Francisco I.Madero y Morelos"
+        },
+        {
+            "name": "Nuevo México",
+            "direccion":"Tercera Oriente, entre Carretera a Tesistán y Octava Sur"
+        },
+        {
+            "name": "Tuzanía , La",
+            "direccion":"Av. Tuzania entre Palmeras y Ajonjoli"
+        },
+        {
+            "name": "Villas de Nuevo México",
+            "direccion":"Entronque de 1 de mayo y Albuquerque"
+        },
+        {
+            "name": "Cuchilla, La (ó Valle de la Providencia)",
+            "direccion":"Base Aerea"
+        }
+    ],
+    "domingo": [
+        {
+            "name": "Agua Blanca Poblado",
+            "direccion":"Guadalupe Gallo entre H. y Cairo y Privada 5 de Mayo"
+        },
+        {
+            "name": "Agua Blanca Sur",
+            "direccion":"Av. Guadalupe Gallo"
+        },
+        {
+            "name": "Batán, El",
+            "direccion":"Francisco I. Madero entre Occidental y Experiencia"
+        },
+        {
+            "name": "Briseño, El",
+            "direccion":"Av. Las Torres entre Colonos Unidos y Santo Tomas"
+        },
+        {
+            "name": "Centinela, El (ó Colinas del Centinela)",
+            "direccion":"Calle Las Misiones"
+        },
+        {
+            "name": "Constitución",
+            "direccion":"Constituyentes entre Manuel M. Dieguez y Gral. Aguirre"
+        },
+        {
+            "name": "Constitución",
+            "direccion":"Obreros de Cananea entre Gral. J. Aguirre y G. Marquez"
+        },
+        {
+            "name": "Emiliano Zapata",
+            "direccion":"Venustiano Carranza entre A. Obregon y Tabachines"
+        },
+        {
+            "name": "Gusa",
+            "direccion":"Aldama hasta la glorieta por calle la Gusa"
+        },
+        {
+            "name": "Huerta, La",
+            "direccion":"Constituyentes, entre Alfonso Gravioto y Pablo Quiroga"
+        },
+        {
+            "name": "Jardines de San Ignacio",
+            "direccion":"Glorieta Chapalita"
+        },
+        {
+            "name": "Jardines de Nuevo México",
+            "direccion":"1a Poniente entre 4a Norte y 8a Sur"
+        },
+        {
+            "name": "Loma Bonita Ejidal",
+            "direccion":"Av. Tabachines entre Río Tuxpan y Av. Patria"
+        },
+        {
+            "name": "Lomas de Tabachines ",
+            "direccion":"Granados, entre Higuerillas y Duraznos"
+        },
+        {
+            "name": "Lomas del Batán",
+            "direccion":"Francisco I Madero entre Occidental y Experiencia"
+        },
+        {
+            "name": "Mesa Colorada",
+            "direccion":"Piña entre Toronja y Barranco"
+        },
+        {
+            "name": "Miramar",
+            "direccion":"Puerto Mazatlán entre Puerto Guaymas y Arenales"
+        },
+        {
+            "name": "Palmita, La",
+            "direccion":"Desde Encarnacion Ortiz hasta Natividad Macias"
+        },
+        {
+            "name": "Paraísos del Colli",
+            "direccion":"Jacarandas entre El Colli y Av. Patria"
+        },
+        {
+            "name": "Pedro Moreno",
+            "direccion":"Obreros de Cananea entre Gral. J. Aguirre y G. Marquez"
+        },
+        {
+            "name": "Residencial Plaza Guadalupe",
+            "direccion":"Av. Moctezuma"
+        },
+        {
+            "name": "San Esteban",
+            "direccion":"Calle Juárez e Hidalgo"
+        },
+        {
+            "name": "San José del Bajio",
+            "direccion":"Plata entre Santa Margarita y L. Cardenas"
+        },
+        {
+            "name": "San Juan de Ocotán",
+            "direccion":"Av. 16 de Septiembre entre Ocampo y 5 de Mayo"
+        },
+        {
+            "name": "Santa Ana Tepetitlán",
+            "direccion":"Emiliano Zapata entre Santa Ana Tepetitlán y Zaragoza"
+        },
+        {
+            "name": "Santa Lucía",
+            "direccion":"Morelos entre M.M. Dieguez y Corregidora"
+        },
+        {
+            "name": "Santa Paula",
+            "direccion":"Constituyentes hasta la glorieta por la calle Gusa."
+        },
+        {
+            "name": "Villas de Guadalupe",
+            "direccion":"San Raymundo entre San Pedro y San Julian"
+        },
+        {
+            "name": "Cuchilla, La (ó Valle de la Providencia)",
+            "direccion":"Chori"
+        }
+    ]
+}
