@@ -1,0 +1,55 @@
+---
+import WithSidebar from '../../layouts/with-sidebar.astro';
+import TianguisList from '../../components/TianguisList.astro';
+
+const days = [
+  { name: 'Lunes', slug: 'lunes' },
+  { name: 'Martes', slug: 'martes' },
+  { name: 'Miércoles', slug: 'miercoles' },
+  { name: 'Jueves', slug: 'jueves' },
+  { name: 'Viernes', slug: 'viernes' },
+  { name: 'Sábado', slug: 'sabado' },
+  { name: 'Domingo', slug: 'domingo' },
+];
+
+export function getStaticPaths() {
+  const daysArray = [
+    { name: 'Lunes', slug: 'lunes' },
+    { name: 'Martes', slug: 'martes' },
+    { name: 'Miércoles', slug: 'miercoles' },
+    { name: 'Jueves', slug: 'jueves' },
+    { name: 'Viernes', slug: 'viernes' },
+    { name: 'Sábado', slug: 'sabado' },
+    { name: 'Domingo', slug: 'domingo' },
+  ];
+  
+  return daysArray.map((day) => ({
+    params: { day: day.slug },
+    props: { day },
+  }));
+}
+
+const { day } = Astro.props;
+const dayName = days.find(d => d.slug === day.slug)?.name || day.slug;
+---
+
+<WithSidebar 
+  title={`Tianguis los ${dayName} - Tianguis GDL`}
+  description={`Encuentra todos los tianguis que operan los ${dayName.toLowerCase()} en Jalisco`}
+>
+  <div class="max-w-7xl">
+    <div class="mb-8">
+      <div class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-3">
+        Filtrado por día
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">
+        Tianguis los {dayName}
+      </h1>
+      <p class="text-lg text-gray-600">
+        Todos los municipios
+      </p>
+    </div>
+
+    <TianguisList day={day.slug} />
+  </div>
+</WithSidebar>

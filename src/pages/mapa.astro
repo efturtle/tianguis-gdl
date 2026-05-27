@@ -1,0 +1,63 @@
+---
+import WithSidebar from '../layouts/with-sidebar.astro';
+import Map from '../components/Map.vue';
+import { TianguisService } from '../services/tianguis';
+
+// Get all tianguis from both municipalities for the map
+const allTianguis = await TianguisService.getTianguis({ state: 'jalisco' });
+
+// Pass as props (Astro will serialize to JSON)
+const tianguisData = allTianguis.map(t => ({
+  name: t.name,
+  lat: t.lat,
+  lng: t.lng,
+  day: t.day,
+  municipality: t.municipality,
+  location: t.location,
+  // Flatten location for easier access
+  direccion: t.location.type === 'address' ? t.location.direccion : null,
+  street1: t.location.type === 'streets' ? t.location.street1 : null,
+  street2: t.location.type === 'streets' ? t.location.street2 : null,
+  street3: t.location.type === 'streets' ? t.location.street3 : null,
+  street4: t.location.type === 'streets' ? t.location.street4 : null,
+}));
+
+const tianguisWithCoords = tianguisData.filter(t => t.lat && t.lng);
+const tianguisWithoutCoords = tianguisData.length - tianguisWithCoords.length;
+---
+
+<WithSidebar 
+  title="Mapa de Tianguis - Tianguis GDL"
+  description="Visualiza todos los tianguis de Guadalajara y Zapopan en el mapa"
+>
+  <div class="max-w-7xl">
+    <div class="mb-6">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">
+        Mapa de Tianguis
+      </h1>
+      <p class="text-lg text-gray-600 mb-4">
+        Explora todos los tianguis en el mapa interactivo
+      </p>
+      
+      <div class="flex gap-4 text-sm">
+        <div class="px-4 py-2 bg-blue-50 text-blue-800 rounded-lg font-medium">
+          📍 {tianguisWithCoords.length} tianguis con ubicación
+        </div>
+        {tianguisWithoutCoords > 0 && (
+          <div class="px-4 py-2 bg-yellow-50 text-yellow-800 rounded-lg font-medium">
+            ⚠️ {tianguisWithoutCoords} sin coordenadas
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-4" style="height: 600px;">
+      <Map client:only="vue" tianguis={tianguisData} initialZoom={11} />
+    </div>
+    
+    <div class="mt-6 text-sm text-gray-600">
+      <p>💡 <strong>Tip:</strong> Haz clic en los marcadores para ver más información de cada tianguis.</p>
+      <p class="mt-2">🔍 Para ver tianguis de un día específico, usa el filtro en la barra lateral.</p>
+    </div>
+  </div>
+</WithSidebar>
