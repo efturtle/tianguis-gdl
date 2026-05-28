@@ -18,21 +18,7 @@
       color="#3B82F6"
     >
       <mgl-popup :offset="25">
-        <div class="tianguis-popup">
-          <h3 class="popup-title">{{ tianguis.name }}</h3>
-          <div class="popup-content">
-            <p class="popup-location">
-              <strong>📍 Ubicación:</strong><br />
-              {{ formatLocation(tianguis) }}
-            </p>
-            <p class="popup-day">
-              <strong>📅 Día:</strong> <span class="day-badge">{{ capitalizeDay(tianguis.day) }}</span>
-            </p>
-            <p class="popup-municipality">
-              <strong>🏙️ Municipio:</strong> {{ capitalizeMunicipality(tianguis.municipality) }}
-            </p>
-          </div>
-        </div>
+        <TianguisPopup :tianguis="tianguis" />
       </mgl-popup>
     </mgl-marker>
   </mgl-map>
@@ -47,7 +33,8 @@ import {
   MglMarker,
   MglPopup,
 } from '@indoorequal/vue-maplibre-gl';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch, ref } from 'vue';
+import TianguisPopup from './TianguisPopup.vue';
 
 // Props
 const props = defineProps({
@@ -65,7 +52,13 @@ const props = defineProps({
   }
 });
 
-const style = 'https://api.maptiler.com/maps/streets-v2/style.json?key=ccXSAsFlfLeYXX5rJs4o';
+// Reactive map style that switches based on dark mode
+const isDarkMode = ref(document.documentElement.classList.contains('dark'));
+const style = ref(
+  isDarkMode.value
+    ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+    : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
+);
 const center = computed(() => {
   // If we have tianguis with coords, center on the first one
   if (props.tianguis.length > 0 && props.tianguis[0].lat && props.tianguis[0].lng) {
@@ -79,39 +72,6 @@ const zoom = props.initialZoom;
 const tianguisWithCoords = computed(() => {
   return props.tianguis.filter(t => t.lat && t.lng);
 });
-
-// Format location string
-function formatLocation(tianguis) {
-  if (tianguis.location?.type === 'address') {
-    return tianguis.location.direccion;
-  } else if (tianguis.location?.type === 'streets') {
-    const loc = tianguis.location;
-    return `${loc.street2}, ${loc.street1}`;
-  }
-  // Fallback for raw data
-  if (tianguis.direccion) return tianguis.direccion;
-  if (tianguis.street2) return `${tianguis.street2}, ${tianguis.street1 || ''}`;
-  return 'Ubicación no disponible';
-}
-
-// Capitalize day name
-function capitalizeDay(day) {
-  const days = {
-    lunes: 'Lunes',
-    martes: 'Martes',
-    miercoles: 'Miércoles',
-    jueves: 'Jueves',
-    viernes: 'Viernes',
-    sabado: 'Sábado',
-    domingo: 'Domingo'
-  };
-  return days[day] || day;
-}
-
-// Capitalize municipality
-function capitalizeMunicipality(municipality) {
-  return municipality.charAt(0).toUpperCase() + municipality.slice(1);
-}
 
 // Map load handler
 function onMapLoad(event) {
@@ -141,59 +101,28 @@ watch(() => props.tianguis, (newTianguis) => {
   console.log(`📊 Tianguis stats: ${withCoords} with coords, ${withoutCoords} without coords`);
 }, { immediate: true });
 
+onMounted(() => {
+  // Watch for dark mode changes
+  const observer = new MutationObserver(() => {
+    const newIsDark = document.documentElement.classList.contains('dark');
+    if (newIsDark !== isDarkMode.value) {
+      isDarkMode.value = newIsDark;
+      style.value = newIsDark
+        ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+        : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+});
+
 </script>
 
 <style lang="scss">
 @import "maplibre-gl/dist/maplibre-gl.css";
-
-.tianguis-popup {
-  font-family: system-ui, -apple-system, sans-serif;
-  max-width: 280px;
-}
-
-.popup-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0 0 12px 0;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #3b82f6;
-}
-
-.popup-content {
-  font-size: 13px;
-  
-  p {
-    margin: 8px 0;
-    color: #4b5563;
-    line-height: 1.5;
-  }
-  
-  strong {
-    color: #1f2937;
-    display: inline-block;
-    margin-bottom: 2px;
-  }
-}
-
-.popup-location {
-  margin-bottom: 12px;
-}
-
-.day-badge {
-  display: inline-block;
-  background: #dbeafe;
-  color: #1e40af;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 12px;
-}
-
-.popup-municipality {
-  color: #6b7280;
-  font-size: 12px;
-}
 
 /* Customize popup styles */
 :deep(.maplibregl-popup-content) {

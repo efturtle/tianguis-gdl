@@ -75,8 +75,8 @@
         {
             "name": "Primavera, La",
             "direccion": "Leona Vicario, entre Av. La Paz e Ignacio Allende",
-            "lat": 20.6723528,
-            "lng": -103.3671815
+            "lat": 20.7250682,
+            "lng": -103.5639892
         },
         {
             "name": "San Isidro Ejidal",
@@ -191,8 +191,8 @@
         {
             "name": "Tepeyac",
             "direccion": "Morelos entre Aurelio Ortega y Laureles",
-            "lat": 18.6813049,
-            "lng": -99.1013498
+            "lat": 20.6990717,
+            "lng": -103.4447588
         },
         {
             "name": "Unidad Gustavo Díaz Ordaz",
@@ -423,8 +423,8 @@
         {
             "name": "Paraísos del Colli,",
             "direccion": "Nogal entre Prolongacion Tepeyac y Vol. Quinceo",
-            "lat": 19.7360115,
-            "lng": -101.2247524
+            "lat": 20.6447098,
+            "lng": -103.4247524
         },
         {
             "name": "Prados Vallarta,",
@@ -673,13 +673,13 @@
             "lng": -103.3912224
         },
         {
-            "name": "Constitución",
+            "name": "Constitución Manuel",
             "direccion": "Constituyentes entre Manuel M. Dieguez y Gral. Aguirre",
             "lat": 20.7311914,
             "lng": -103.3697954
         },
         {
-            "name": "Constitución",
+            "name": "Constitución Obreros de Cananea",
             "direccion": "Obreros de Cananea entre Gral. J. Aguirre y G. Marquez",
             "lat": 20.7295754,
             "lng": -103.360703
@@ -813,8 +813,8 @@
         {
             "name": "Cuchilla, La (ó Valle de la Providencia)",
             "direccion": "Chori",
-            "lat": 19.6838483,
-            "lng": -103.4833326
+            "lat": 20.7683123,
+            "lng": -103.450221
         }
     ]
 }

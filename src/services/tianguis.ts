@@ -7,6 +7,7 @@ import type {
   TianguisLocation,
 } from '../types/tianguis';
 import { MUNICIPALITIES } from '../config/municipalities';
+import { normalizeForSearch } from '../utils/text';
 
 /**
  * Configuration for data source
@@ -180,6 +181,7 @@ export class TianguisService {
 
   /**
    * Filter tianguis based on query parameters
+   * Search is accent-insensitive (e.g., "seccion" matches "Sección")
    */
   private static filterTianguis(
     tianguis: Tianguis[],
@@ -192,9 +194,9 @@ export class TianguisService {
     }
 
     if (query.search) {
-      const searchLower = query.search.toLowerCase();
+      const normalizedQuery = normalizeForSearch(query.search);
       filtered = filtered.filter((t) =>
-        t.name.toLowerCase().includes(searchLower)
+        normalizeForSearch(t.name).includes(normalizedQuery)
       );
     }
 

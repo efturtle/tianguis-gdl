@@ -13,7 +13,7 @@ const { title, description, image, type } = Astro.props;
 ---
 
 <Base title={title} description={description} image={image} type={type}>
-  <div class="flex min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+  <div class="flex min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
     <Sidebar />
     <main class="flex-1 p-8">
       <slot />

@@ -1,36 +1,94 @@
 ---
-import WithSidebar from '../layouts/with-sidebar.astro';
+import Base from '../layouts/base.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SearchDashboard from '../components/SearchDashboard.vue';
 import TianguisList from '../components/TianguisList.astro';
+import Map from '../components/Map.vue';
 import { MUNICIPALITIES } from '../config/municipalities';
+import { TianguisService } from '../services/tianguis';
+
+// Fetch all tianguis for the default view (Guadalajara or all)
+const allTianguis = await TianguisService.getTianguis({ state: 'jalisco' });
 ---
 
-<WithSidebar title="Tianguis GDL - Encuentra tianguis en Guadalajara y Zapopan">
-	<div class="max-w-7xl">
-		<div class="mb-8">
-			<h1 class="text-4xl font-bold text-gray-900 mb-4">
-				Bienvenido a Tianguis GDL
-			</h1>
-			<p class="text-lg text-gray-600 mb-6">
-				Encuentra los mejores tianguis en Guadalajara y Zapopan organizados por día y ubicación.
-			</p>
-			
-			<div class="flex gap-4 flex-wrap">
-				{MUNICIPALITIES.map((municipality) => (
-					<a 
-						href={`/${municipality.slug}`}
-						class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md hover:shadow-lg"
-					>
-						Ver tianguis en {municipality.name}
-					</a>
-				))}
-			</div>
-		</div>
+<Base title="Tianguis GDL - Encuentra tianguis cerca de ti">
+    <div class="md:flex min-h-screen md:bg-gradient-to-br md:from-blue-50 md:via-indigo-50 md:to-purple-100 dark:md:from-gray-800 dark:md:via-gray-700 dark:md:to-gray-900">
+        <div class="hidden md:block">
+            <Sidebar />
+        </div>
+        
+        <div class="block md:hidden flex-1 min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+            <div>
+                <SearchDashboard client:load />
+            </div>
 
-		<div class="mt-12">
-			<h2 class="text-2xl font-bold text-gray-900 mb-6">
-				Tianguis en Guadalajara
-			</h2>
-			<TianguisList municipality="guadalajara" />
-		</div>
-	</div>
-</WithSidebar>
+            <div class="py-6 md:hidden">
+                <div class="max-w-screen-md mx-auto px-4 sm:px-6">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 px-1">
+                        Explorar por municipio
+                    </h2>
+                    <div class="flex flex-col gap-3 mb-6 sm:grid sm:grid-cols-2 sm:gap-4">
+                        {MUNICIPALITIES.map((municipality) => (
+                            <a 
+                                href={`/${municipality.slug}`}
+                                class="flex items-center p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl transition-all duration-200 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md hover:translate-x-0.5"
+                            >
+                                <div class="flex items-center justify-center w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-lg mr-3">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <span class="flex-1 font-medium text-gray-900 dark:text-gray-100">{municipality.name}</span>
+                                <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        ))}
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <a href="/mapa" class="flex items-center gap-3 py-3.5 px-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-blue-500 dark:text-blue-400 font-medium transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 dark:hover:bg-blue-900/30 dark:hover:border-blue-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            </svg>
+                            <span>Ver mapa completo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden md:flex flex-1 gap-6 h-screen p-8 overflow-hidden">
+            <div class="w-[400px] shrink-0 flex items-center justify-center">
+                <div class="text-center px-6">
+                    <div class="mb-6">
+                        <svg class="w-20 h-20 text-gray-400 dark:text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                        Bienvenido a Tianguis GDL
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Selecciona una ciudad o día de la semana desde el menú lateral para ver los tianguis disponibles en el mapa.
+                    </p>
+                    <div class="flex flex-col gap-3 text-sm text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="text-blue-500 dark:text-blue-400">🏙️</span>
+                            <span>Filtra por ciudad</span>
+                        </div>
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="text-purple-500 dark:text-purple-400">📅</span>
+                            <span>Filtra por día</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
+                <Map :tianguis={[]} client:only="vue" />
+            </div>
+        </div>
+    </div>
+</Base>

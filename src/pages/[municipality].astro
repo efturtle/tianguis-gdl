@@ -44,26 +44,26 @@ const tianguisWithCoords = tianguisData.filter(t => t.lat && t.lng).length;
 >
   <div class="max-w-7xl">
     <div class="mb-8">
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2 dark:text-gray-100">
         Tianguis en {municipalityData.name}
       </h1>
-      <p class="text-lg text-gray-600 mb-4">
+      <p class="text-lg text-gray-600 mb-4 dark:text-gray-400">
         {municipalityData.state}
       </p>
       
-      <div class="text-sm text-gray-600">
+      <div class="text-sm text-gray-600 dark:text-gray-400">
         📍 {tianguisWithCoords} tianguis con ubicación en el mapa
       </div>
     </div>
 
     <!-- Map Section -->
-    <div class="mb-8 bg-white rounded-lg shadow-lg p-4" style="height: 500px;">
+    <div class="mb-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4" style="height: 500px;">
       <Map client:only="vue" tianguis={tianguisData} initialZoom={12} />
     </div>
 
     <!-- List Section -->
     <div class="mb-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4 dark:text-gray-100">
         Lista de Tianguis
       </h2>
       <TianguisList municipality={municipalityData.slug} />
