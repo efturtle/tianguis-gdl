@@ -1,5 +1,5 @@
 ---
-import { MUNICIPALITIES } from '../config/municipalities';
+import { MUNICIPALITIES } from '../../config/municipalities';
 import DarkModeToggle from './DarkModeToggle.vue';
 
 const days = [
@@ -49,6 +49,16 @@ const getDayLink = (daySlug: string) => {
         <DarkModeToggle client:load />
       </div>
       <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Encuentra tianguis cerca de ti</p>
+    </div>
+
+    <!-- Clear selections -->
+    <div class="mb-8">
+      <button
+        class="w-full px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+        onclick="window.location.href='/'"
+      >
+        Limpiar selecciones
+      </button>
     </div>
 
     <!-- Cities Section -->

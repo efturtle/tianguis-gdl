@@ -1,29 +1,24 @@
 ---
 import Base from '../layouts/base.astro';
-import Sidebar from '../components/Sidebar.astro';
-import SearchDashboard from '../components/SearchDashboard.vue';
-import TianguisList from '../components/TianguisList.astro';
-import Map from '../components/Map.vue';
+import Sidebar from '../components/ui/Sidebar.astro';
+import SearchDashboard from '../components/ui/SearchDashboard.vue';
+import Map from '../components/map/Map.vue';
 import { MUNICIPALITIES } from '../config/municipalities';
-import { TianguisService } from '../services/tianguis';
-
-// Fetch all tianguis for the default view (Guadalajara or all)
-const allTianguis = await TianguisService.getTianguis({ state: 'jalisco' });
 ---
 
 <Base title="Tianguis GDL - Encuentra tianguis cerca de ti">
-    <div class="md:flex min-h-screen md:bg-gradient-to-br md:from-blue-50 md:via-indigo-50 md:to-purple-100 dark:md:from-gray-800 dark:md:via-gray-700 dark:md:to-gray-900">
+    <div class="md:flex min-h-screen md:bg-linear-to-br md:from-blue-50 md:via-indigo-50 md:to-purple-100 dark:md:from-gray-800 dark:md:via-gray-700 dark:md:to-gray-900">
         <div class="hidden md:block">
             <Sidebar />
         </div>
         
-        <div class="block md:hidden flex-1 min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <div class="block md:hidden flex-1 min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div>
                 <SearchDashboard client:load />
             </div>
 
             <div class="py-6 md:hidden">
-                <div class="max-w-screen-md mx-auto px-4 sm:px-6">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6">
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 px-1">
                         Explorar por municipio
                     </h2>

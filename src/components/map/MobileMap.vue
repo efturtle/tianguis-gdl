@@ -161,7 +161,7 @@ import {
 import { formatDistance as formatDist } from '../utils/geolocation';
 import type { DayOfWeek } from '../types/tianguis';
 import TianguisPopup from './TianguisPopup.vue';
-import DarkModeToggle from './DarkModeToggle.vue';
+import DarkModeToggle from './ui/DarkModeToggle.vue';
 
 interface Props {
   tianguis: any[];

@@ -132,11 +132,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import type { Tianguis, DayOfWeek } from '../types/tianguis';
-import { getUserLocation, calculateDistance } from '../utils/geolocation';
-import { normalizeForSearch } from '../utils/text';
-import DarkModeToggle from './DarkModeToggle.vue';
-import TianguisCard from './TianguisCard.vue';
+import type { Tianguis, DayOfWeek } from '../../types/tianguis.ts';
+import { getUserLocation, calculateDistance } from '../../utils/geolocation.ts';
+import { normalizeForSearch } from '../../utils/text.ts';
+import DarkModeToggle from './../ui/DarkModeToggle.vue';
+import TianguisCard from './../tianguis/TianguisCard.vue';
 
 interface TianguisWithDistance extends Tianguis {
   distance?: number;

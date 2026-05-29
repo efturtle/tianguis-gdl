@@ -17,7 +17,7 @@
           {{ formatLocation(tianguis.location) }}
         </p>
       </div>
-      <div v-if="tianguis.distance" class="ml-4 text-right flex-shrink-0">
+      <div v-if="tianguis.distance" class="ml-4 text-right shrink-0">
         <div class="text-lg font-bold text-blue-600 dark:text-blue-400">
           {{ formatDistance(tianguis.distance) }}
         </div>
@@ -43,8 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Tianguis, DayOfWeek } from '../types/tianguis';
-import { formatDistance as formatDistanceUtil } from '../utils/geolocation';
+import type { Tianguis, DayOfWeek } from '../../types/tianguis';
+import { formatDistance as formatDistanceUtil } from '../../utils/geolocation';
 
 interface TianguisWithDistance extends Tianguis {
   distance?: number;

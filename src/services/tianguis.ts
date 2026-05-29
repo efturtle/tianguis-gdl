@@ -79,7 +79,7 @@ export class TianguisService {
     try {
       // Dynamically import the JSON file
       const data: LocalTianguisData = await import(
-        `../assets/datasets/${municipality}.json`
+        `../data/${municipality}.json`
       ).then((module) => module.default);
 
       return this.normalizeLocalData(data, state, municipality);
