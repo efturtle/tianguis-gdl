@@ -4,6 +4,23 @@ import TianguisList from "../../components/tianguis/TianguisList.astro";
 import Map from "../../components/map/Map.vue";
 import { TianguisService } from "../../services/tianguis";
 
+export function getStaticPaths() {
+  const days = [
+    { name: "Lunes", slug: "lunes" },
+    { name: "Martes", slug: "martes" },
+    { name: "Miércoles", slug: "miercoles" },
+    { name: "Jueves", slug: "jueves" },
+    { name: "Viernes", slug: "viernes" },
+    { name: "Sábado", slug: "sabado" },
+    { name: "Domingo", slug: "domingo" },
+  ];
+
+  return days.map((day) => ({
+    params: { day: day.slug },
+    props: { day },
+  }));
+}
+
 const days = [
   { name: "Lunes", slug: "lunes" },
   { name: "Martes", slug: "martes" },
@@ -66,3 +83,29 @@ const dayName = days.find((d) => d.slug === day.slug)?.name || day.slug;
     </div>
   </div>
 </WithSidebar>
+
+<script>
+  // Check if viewport is mobile (< 768px based on Tailwind's md breakpoint)
+  function isMobile() {
+    return window.innerWidth < 768;
+  }
+
+  // Redirect to home if mobile
+  function checkAndRedirect() {
+    if (isMobile()) {
+      window.location.href = '/';
+    }
+  }
+
+  // Check on initial load
+  checkAndRedirect();
+
+  // Listen for resize events with debouncing
+  let resizeTimer: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      checkAndRedirect();
+    }, 250);
+  });
+</script>

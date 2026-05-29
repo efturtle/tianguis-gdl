@@ -14,34 +14,11 @@ import { MUNICIPALITIES } from '../config/municipalities';
         
         <div class="block md:hidden flex-1 min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div>
-                <SearchDashboard client:load />
+                <SearchDashboard client:only="vue" />
             </div>
 
             <div class="py-6 md:hidden">
                 <div class="max-w-3xl mx-auto px-4 sm:px-6">
-                    <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 px-1">
-                        Explorar por municipio
-                    </h2>
-                    <div class="flex flex-col gap-3 mb-6 sm:grid sm:grid-cols-2 sm:gap-4">
-                        {MUNICIPALITIES.map((municipality) => (
-                            <a 
-                                href={`/${municipality.slug}`}
-                                class="flex items-center p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl transition-all duration-200 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md hover:translate-x-0.5"
-                            >
-                                <div class="flex items-center justify-center w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-lg mr-3">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
-                                <span class="flex-1 font-medium text-gray-900 dark:text-gray-100">{municipality.name}</span>
-                                <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        ))}
-                    </div>
-
                     <div class="flex flex-col gap-3">
                         <a href="/mapa" class="flex items-center gap-3 py-3.5 px-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-blue-500 dark:text-blue-400 font-medium transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 dark:hover:bg-blue-900/30 dark:hover:border-blue-400">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

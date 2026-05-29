@@ -35,6 +35,11 @@ import {
 import { computed, onMounted, onUnmounted, watch, ref } from 'vue';
 import TianguisPopup from './TianguisPopup.vue';
 
+// Disable automatic attribute inheritance to prevent warnings with MglMap
+defineOptions({
+  inheritAttrs: false
+});
+
 // Props
 const props = defineProps({
   tianguis: {

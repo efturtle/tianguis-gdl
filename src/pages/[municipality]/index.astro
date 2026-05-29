@@ -70,3 +70,29 @@ const tianguisWithCoords = tianguisData.filter(t => t.lat && t.lng).length;
     </div>
   </div>
 </WithSidebar>
+
+<script>
+  // Check if viewport is mobile (< 768px based on Tailwind's md breakpoint)
+  function isMobile() {
+    return window.innerWidth < 768;
+  }
+
+  // Redirect to home if mobile
+  function checkAndRedirect() {
+    if (isMobile()) {
+      window.location.href = '/';
+    }
+  }
+
+  // Check on initial load
+  checkAndRedirect();
+
+  // Listen for resize events with debouncing
+  let resizeTimer: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      checkAndRedirect();
+    }, 250);
+  });
+</script>

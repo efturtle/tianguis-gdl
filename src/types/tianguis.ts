@@ -17,6 +17,13 @@ export interface Tianguis {
 }
 
 /**
+ * Base Tianguis interface with distance (used for search results)
+ */
+export interface TianguisWithDistance extends Tianguis {
+  distance: number; // Distance in kilometers from user's location
+}
+
+/**
  * Location can be either street-based or address-based
  */
 export type TianguisLocation = StreetLocation | AddressLocation;
