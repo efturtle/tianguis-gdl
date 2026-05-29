@@ -170,106 +170,102 @@ import {
   MglPopup,
 } from '@indoorequal/vue-maplibre-gl';
 import { formatDistance as formatDist, calculateDistance, getUserLocation } from '../../utils/geolocation';
-import type { DayOfWeek } from '../../types/tianguis';
+import type { Tianguis, DayOfWeek } from '../../types/tianguis';
 import TianguisPopup from './TianguisPopup.vue';
 import DarkModeToggle from './../ui/DarkModeToggle.vue';
 
-interface Props {
-  tianguis: any[];
+// Define the extended type used in this component
+interface TianguisWithDistance extends Tianguis {
+  distance?: number;
 }
 
-const props = defineProps<Props>();
+const props = defineProps<{
+  tianguis: TianguisWithDistance[];
+}>();
 
-const urlParams = new URLSearchParams(window.location.search);
-const focusLat = urlParams.get('lat') ? parseFloat(urlParams.get('lat')!) : null;
-const focusLng = urlParams.get('lng') ? parseFloat(urlParams.get('lng')!) : null;
-let observer: MutationObserver | null = null;
-
+// Refs & State
 const mapInstance = ref<any>(null);
 const bottomSheet = ref<HTMLElement | null>(null);
-const selectedTianguis = ref<any | null>(null);
+const selectedTianguis = ref<TianguisWithDistance | null>(null);
 const isSheetExpanded = ref(false);
 const userLocation = ref<{ lat: number; lng: number } | null>(null);
-const displayedTianguis = ref<any[]>([]);
+const displayedTianguis = ref<TianguisWithDistance[]>([]);
 
-// Reactive map style that switches based on dark mode
-const isDarkMode = ref(document.documentElement.classList.contains('dark'));
-const style = ref(
-  isDarkMode.value
-    ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
-    : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
-);
-
+// Map configuration state
+const isDarkMode = ref(false);
+const style = ref('');
 const mapCenter = ref<[number, number]>([-103.3496, 20.6597]);
 const mapZoom = ref(12);
 
+let observer: MutationObserver | null = null;
 let touchStartY = 0;
 
+// Update the map style based on the HTML class
+function updateTheme() {
+  isDarkMode.value = document.documentElement.classList.contains('dark');
+  style.value = isDarkMode.value
+    ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+    : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+}
 
 async function onMapLoad(event: any) {
-  if (focusLat != null && focusLng != null) {
-    await focusTianguis(event, focusLat, focusLng);
+  const urlParams = new URLSearchParams(window.location.search);
+  const focusLat = urlParams.get('lat') ? parseFloat(urlParams.get('lat')!) : null;
+  const focusLng = urlParams.get('lng') ? parseFloat(urlParams.get('lng')!) : null;
+
+  if (focusLat !== null && focusLng !== null) {
+    await focusTianguis(event.map, focusLat, focusLng);
   } else {
-    markNearestOnes();
+    await markNearestOnes(event.map);
   }
 }
 
-async function markNearestOnes() {
+async function markNearestOnes(mapObject: any) {
   try {
-    const location = await getUserLocation();
-    userLocation.value = location;
+    userLocation.value = await getUserLocation();
 
-    props.tianguis.forEach((t) => {
-      if (t.lat && t.lng) {
-        t.distance = calculateDistance(userLocation.value!, { lat: t.lat, lng: t.lng });
+    const tianguisData = [...props.tianguis];
+    tianguisData.forEach((t) => {
+      if (t.lat && t.lng && userLocation.value) {
+        t.distance = calculateDistance(userLocation.value, { lat: t.lat, lng: t.lng });
       }
     });
 
-    // Sort tianguis by distance and take the nearest 5
-    const nearest = props.tianguis
-      .filter((t) => t.lat && t.lng)
-      .sort((a, b) => a.distance - b.distance)
+    // Sort by distance and take the nearest 5
+    const nearest = tianguisData
+      .filter((t) => t.lat && t.lng && t.distance !== undefined)
+      .sort((a, b) => (a.distance || 0) - (b.distance || 0))
       .slice(0, 5);
 
-    // Display the 5 nearest markers
     displayedTianguis.value = nearest;
 
-    if (nearest.length > 0) {
-      const nearestTianguis = nearest[0];
+    if (nearest.length > 0 && mapObject) {
       setTimeout(() => {
-        if (mapInstance.value?.map) {
-          mapInstance.value.map.flyTo({
-            center: [nearestTianguis.lng, nearestTianguis.lat],
-            zoom: 14,
-            duration: 1500,
-          });
-        }
+        mapObject.flyTo({
+          center: [nearest[0].lng, nearest[0].lat],
+          zoom: 14,
+          duration: 1500,
+        });
       }, 500);
     }
-
   } catch (error) {
     console.error('Error getting user location:', error);
   }
 }
 
-async function focusTianguis(event: any, focusLat: number, focusLng: number) {
+async function focusTianguis(mapObject: any, focusLat: number, focusLng: number) {
   const tolerance = 0.0001;
   const focused = props.tianguis.find(
     (t) => t.lat && t.lng && Math.abs(t.lat - focusLat) < tolerance && Math.abs(t.lng - focusLng) < tolerance
   );
 
   if (focused) {
-    console.log('Found focused tianguis:', focused.name);
-
-    // Display only the focused tianguis marker
     displayedTianguis.value = [focused];
 
-    // Center and zoom to the selected tianguis
     setTimeout(() => {
       selectedTianguis.value = { ...focused };
-
-      if (event.map) {
-        event.map.flyTo({
+      if (mapObject) {
+        mapObject.flyTo({
           center: [focusLng, focusLat],
           zoom: 16,
           duration: 1500,
@@ -279,42 +275,29 @@ async function focusTianguis(event: any, focusLat: number, focusLng: number) {
   }
 }
 
+// UI Interaction Functions
 function toggleSheet() {
   isSheetExpanded.value = !isSheetExpanded.value;
 }
 
-function formatLocation(tianguis: any) {
-  if (tianguis.location?.type === 'address') {
-    return tianguis.location.direccion;
+function handleTouchStart(event: TouchEvent) {
+  touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event: TouchEvent) {
+  if (!bottomSheet.value) return;
+  const touchY = event.touches[0].clientY;
+  const deltaY = touchStartY - touchY;
+
+  if (deltaY > 0) {
+    isSheetExpanded.value = true;
+  } else if (deltaY < -50 && isSheetExpanded.value) {
+    isSheetExpanded.value = false;
   }
-  if (tianguis.location?.type === 'streets') {
-    const loc = tianguis.location;
-    return `${loc.street1} / ${loc.street2}`;
-  }
-  if (tianguis.direccion) return tianguis.direccion;
-  if (tianguis.street1) return `${tianguis.street1} / ${tianguis.street2 || ''}`;
-  return 'Ubicación no disponible';
 }
 
-function getDayLabel(day: DayOfWeek): string {
-  const days = {
-    lunes: 'Lunes',
-    martes: 'Martes',
-    miercoles: 'Miércoles',
-    jueves: 'Jueves',
-    viernes: 'Viernes',
-    sabado: 'Sábado',
-    domingo: 'Domingo',
-  };
-  return days[day] || day;
-}
-
-function capitalizeMunicipality(municipality: string): string {
-  return municipality.charAt(0).toUpperCase() + municipality.slice(1);
-}
-
-function formatDistance(km: number): string {
-  return formatDist(km);
+function handleTouchEnd() {
+  touchStartY = 0;
 }
 
 function goBack() {
@@ -340,10 +323,10 @@ function onGeolocate(event: any) {
   }
 }
 
+// Action Handlers
 function openInGoogleMaps() {
   if (selectedTianguis.value) {
-    // Note: I also fixed a string interpolation bug here (`0{...}` instead of `${...}`) 
-    // and updated to the standard Google Maps search URL formatting.
+    // FIXED: Properly formats the Google Maps URL
     const url = `https://www.google.com/maps/search/?api=1&query=${selectedTianguis.value.lat},${selectedTianguis.value.lng}`;
     window.open(url, '_blank');
   }
@@ -370,43 +353,35 @@ async function shareLocation() {
   }
 }
 
-function handleTouchStart(event: TouchEvent) {
-  touchStartY = event.touches[0].clientY;
+// Formatting Utilities
+function formatLocation(tianguis: any) {
+  if (tianguis.location?.type === 'address') return tianguis.location.direccion;
+  if (tianguis.location?.type === 'streets') return `${tianguis.location.street1} / ${tianguis.location.street2}`;
+  return 'Ubicación no disponible';
 }
 
-function handleTouchMove(event: TouchEvent) {
-  if (!bottomSheet.value) return;
-
-  const touchY = event.touches[0].clientY;
-  const deltaY = touchStartY - touchY;
-
-  if (deltaY > 0) {
-    isSheetExpanded.value = true;
-  } else if (deltaY < -50 && isSheetExpanded.value) {
-    isSheetExpanded.value = false;
-  }
+function getDayLabel(day: DayOfWeek): string {
+  const days: Record<DayOfWeek, string> = {
+    lunes: 'Lunes', martes: 'Martes', miercoles: 'Miércoles',
+    jueves: 'Jueves', viernes: 'Viernes', sabado: 'Sábado', domingo: 'Domingo'
+  };
+  return days[day] || day;
 }
 
-function handleTouchEnd() {
-  touchStartY = 0;
+function capitalizeMunicipality(municipality: string): string {
+  return municipality.charAt(0).toUpperCase() + municipality.slice(1);
 }
 
+function formatDistance(km: number): string {
+  return formatDist(km);
+}
+
+// Lifecycle Hooks
 onMounted(() => {
-  // 1. Set the initial state immediately when the map page loads
-  isDarkMode.value = document.documentElement.classList.contains('dark');
-  style.value = isDarkMode.value
-    ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
-    : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+  updateTheme();
 
-  // 2. Set up the observer to watch for the toggle button being clicked
   observer = new MutationObserver(() => {
-    const newIsDark = document.documentElement.classList.contains('dark');
-    if (newIsDark !== isDarkMode.value) {
-      isDarkMode.value = newIsDark;
-      style.value = newIsDark
-        ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
-        : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
-    }
+    updateTheme();
   });
 
   observer.observe(document.documentElement, {
@@ -415,11 +390,8 @@ onMounted(() => {
   });
 });
 
-// 3. Prevent memory leaks by disconnecting when navigating away
 onUnmounted(() => {
-  if (observer) {
-    observer.disconnect();
-  }
+  if (observer) observer.disconnect();
 });
 </script>
 
