@@ -1,0 +1,22 @@
+---
+import Base from './base.astro';
+import Sidebar from '../components/ui/Sidebar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+}
+
+const { title, description, image, type } = Astro.props;
+---
+
+<Base title={title} description={description} image={image} type={type}>
+  <div class="flex min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <Sidebar />
+    <main class="flex-1 p-2 lg:p-4">
+      <slot />
+    </main>
+  </div>
+</Base>

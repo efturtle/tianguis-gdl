@@ -1,46 +1,103 @@
-# tianguis-gdl
+# Tianguis GDL
 
-This template should help get you started developing with Vue 3 in Vite.
+An interactive web application built to help residents of the Guadalajara metropolitan area easily locate, filter, and navigate to local street markets (tianguis). 
 
-## Recommended IDE Setup
+## ✨ Features
+* **Interactive Map:** View market locations using MapLibre GL with custom map markers.
+* **Smart Filtering:** Filter markets by the day of the week or search by neighborhood/street name using accent-insensitive text matching.
+* **Geolocation:** Instantly find the tianguis closest to your current location with real-time distance calculations.
+* **Mobile-First UI:** Includes a highly responsive bottom-sheet interface for seamless mobile browsing.
+* **Dark Mode:** Fully supported dark and light themes that respect system preferences.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 🛠️ Tech Stack
+* **Framework:** [Astro](https://astro.build/) (Static Site Generation)
+* **UI Components:** [Vue 3](https://vuejs.org/) (Composition API)
+* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+* **Mapping:** [MapLibre GL JS](https://maplibre.org/)
+* **Testing:** [Vitest](https://vitest.dev/) & Vue Test Utils
+* **Language:** TypeScript
 
-## Type Support for `.vue` Imports in TS
+## 🚀 Getting Started
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### Prerequisites
+Ensure you have **Node.js** installed. This project requires Node version `>=22.12.0`.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/efturtle/tianguis-gdl.git
+   cd tianguis-gdl
+   ```
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Customize configuration
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+4. Open your browser and navigate to `http://localhost:4321`
 
-## Project Setup
+### Available Scripts
 
-```sh
-npm install
+* **`npm run dev`** - Start the development server with hot reloading
+* **`npm run build`** - Build the production-ready static site
+* **`npm run preview`** - Preview the production build locally
+* **`npm run test`** - Run unit tests with Vitest
+* **`npm run test:types`** - Run TypeScript type checking tests
+
+## 📂 Project Structure
+
+```
+tianguis-gdl/
+├── src/
+│   ├── assets/          # Static assets (images, icons)
+│   ├── components/      # Vue & Astro components
+│   │   ├── map/         # Map-related components (MapLibre GL)
+│   │   ├── tianguis/    # Tianguis listing components
+│   │   └── ui/          # Reusable UI components
+│   ├── config/          # Configuration files (municipalities)
+│   ├── data/            # Tianguis data by municipality (JSON)
+│   ├── layouts/         # Astro layout templates
+│   ├── pages/           # Astro pages and routes
+│   ├── services/        # Business logic and data services
+│   ├── styles/          # Global CSS and Tailwind styles
+│   ├── types/           # TypeScript type definitions
+│   └── utils/           # Helper functions (geolocation, text)
+├── public/              # Public static assets
+└── tests/               # Test files (*.test.ts)
 ```
 
-### Compile and Hot-Reload for Development
+## 📍 Data Structure
 
-```sh
-npm run dev
+Market (tianguis) data is organized by municipality in JSON files under `src/data/`. Each market entry includes:
+
+* **name** - Name of the market or neighborhood
+* **street1-4** - Surrounding streets that define the market location
+* **lat/lng** - Geographic coordinates for map display
+* **day** - Day of the week the market operates (organized by JSON key)
+
+## 🧪 Testing
+
+This project uses Vitest for unit testing with comprehensive coverage of:
+- Vue components
+- Service layer logic
+- Utility functions
+- TypeScript type definitions
+
+Run tests with:
+```bash
+npm run test          # Run all tests
+npm run test:types    # Type checking only
 ```
 
-### Type-Check, Compile and Minify for Production
+## 📝 License
 
-```sh
-npm run build
-```
+This project is open source and available under the [MIT License](LICENSE).
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## 🤝 Contributing
 
-```sh
-npm run test:unit
-```
+Contributions are welcome! Please feel free to submit a Pull Request.

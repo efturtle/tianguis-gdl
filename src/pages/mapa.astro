@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/base.astro';
+import MobileMap from '../components/map/MobileMap.vue';
+import { TianguisService } from '../services/tianguis';
+
+// Get URL parameters for page metadata
+const url = new URL(Astro.request.url);
+const focusName = url.searchParams.get('name') || null;
+
+// Get all tianguis from both municipalities for the map
+const allTianguis = await TianguisService.getTianguis({ state: 'jalisco' });
+
+// Pass as props (Astro will serialize to JSON)
+const tianguisData = allTianguis.map(t => ({
+  name: t.name,
+  lat: t.lat,
+  lng: t.lng,
+  day: t.day,
+  municipality: t.municipality,
+  location: t.location,
+  // Flatten location for easier access
+  direccion: t.location.type === 'address' ? t.location.direccion : null,
+  street1: t.location.type === 'streets' ? t.location.street1 : null,
+  street2: t.location.type === 'streets' ? t.location.street2 : null,
+  street3: t.location.type === 'streets' ? t.location.street3 : null,
+  street4: t.location.type === 'streets' ? t.location.street4 : null,
+}));
+
+const pageTitle = focusName 
+  ? `${focusName} - Mapa de Tianguis` 
+  : 'Mapa de Tianguis - Tianguis GDL';
+const pageDescription = focusName
+  ? `Ubicación de ${focusName} en el mapa`
+  : 'Visualiza todos los tianguis de Guadalajara y Zapopan en el mapa';
+---
+
+<Base 
+  title={pageTitle}
+  description={pageDescription}
+>
+  <MobileMap 
+    client:only="vue"
+    tianguis={tianguisData}
+  />
+</Base>
+
+<style>
+  /* Remove any default body padding/margin for full-screen map */
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import WithSidebar from "../../layouts/with-sidebar.astro";
+import TianguisList from "../../components/tianguis/TianguisList.astro";
+import Map from "../../components/map/Map.vue";
+import { TianguisService } from "../../services/tianguis";
+
+export function getStaticPaths() {
+  const days = [
+    { name: "Lunes", slug: "lunes" },
+    { name: "Martes", slug: "martes" },
+    { name: "Miércoles", slug: "miercoles" },
+    { name: "Jueves", slug: "jueves" },
+    { name: "Viernes", slug: "viernes" },
+    { name: "Sábado", slug: "sabado" },
+    { name: "Domingo", slug: "domingo" },
+  ];
+
+  return days.map((day) => ({
+    params: { day: day.slug },
+    props: { day },
+  }));
+}
+
+const days = [
+  { name: "Lunes", slug: "lunes" },
+  { name: "Martes", slug: "martes" },
+  { name: "Miércoles", slug: "miercoles" },
+  { name: "Jueves", slug: "jueves" },
+  { name: "Viernes", slug: "viernes" },
+  { name: "Sábado", slug: "sabado" },
+  { name: "Domingo", slug: "domingo" },
+];
+
+const { day } = Astro.props;
+
+// Get filtered tianguis for this municipality and day
+const tianguis = await TianguisService.getTianguis({
+  day: day.slug as any,
+  state: "jalisco",
+});
+
+// Prepare data for map
+const tianguisData = tianguis.map((t) => ({
+  name: t.name,
+  lat: t.lat,
+  lng: t.lng,
+  day: t.day,
+  municipality: t.municipality,
+  location: t.location,
+  direccion: t.location.type === "address" ? t.location.direccion : null,
+  street1: t.location.type === "streets" ? t.location.street1 : null,
+  street2: t.location.type === "streets" ? t.location.street2 : null,
+}));
+const dayName = days.find((d) => d.slug === day.slug)?.name || day.slug;
+---
+
+<WithSidebar
+  title={`Tianguis los ${dayName} - Tianguis GDL`}
+  description={`Encuentra todos los tianguis que operan los ${dayName.toLowerCase()} en Jalisco`}
+>
+  <div class="hidden md:flex flex-1 sticky top-0 h-screen p-4">
+    <div class="w-full max-w-3xs shrink-0 h-full">
+      <div
+        class="h-full rounded-2xl dark:bg-gray-800 border-gray-100 dark:border-gray-700 p-2 flex flex-col min-h-0"
+      >
+        <h1 class="text-4xl font-bold text-gray-900 mb-2 dark:text-gray-100">
+          Tianguis los {dayName}
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          Todos los municipios
+        </p>
+        <p class="text-gray-600 dark:text-gray-300">
+          {tianguisData.length} resultados
+        </p>
+        <div class="mt-6 min-h-0 flex-1 overflow-y-auto pr-2">
+          <TianguisList day={day.slug} />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
+      <Map client:only="vue" tianguis={tianguisData} initialZoom={13} />
+    </div>
+  </div>
+</WithSidebar>
+
+<script>
+  // Check if viewport is mobile (< 768px based on Tailwind's md breakpoint)
+  function isMobile() {
+    return window.innerWidth < 768;
+  }
+
+  // Redirect to home if mobile
+  function checkAndRedirect() {
+    if (isMobile()) {
+      window.location.href = '/';
+    }
+  }
+
+  // Check on initial load
+  checkAndRedirect();
+
+  // Listen for resize events with debouncing
+  let resizeTimer: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      checkAndRedirect();
+    }, 250);
+  });
+</script>

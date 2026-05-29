@@ -1,0 +1,130 @@
+---
+import WithSidebar from '../../layouts/with-sidebar.astro';
+import TianguisList from '../../components/tianguis/TianguisList.astro';
+import Map from '../../components/map/Map.vue';
+import { MUNICIPALITIES, getMunicipalityBySlug } from '../../config/municipalities';
+import { TianguisService } from '../../services/tianguis';
+
+const days = [
+  { name: 'Lunes', slug: 'lunes' },
+  { name: 'Martes', slug: 'martes' },
+  { name: 'Miércoles', slug: 'miercoles' },
+  { name: 'Jueves', slug: 'jueves' },
+  { name: 'Viernes', slug: 'viernes' },
+  { name: 'Sábado', slug: 'sabado' },
+  { name: 'Domingo', slug: 'domingo' },
+];
+
+export function getStaticPaths() {
+  const paths = [];
+  
+  const daysArray = [
+    { name: 'Lunes', slug: 'lunes' },
+    { name: 'Martes', slug: 'martes' },
+    { name: 'Miércoles', slug: 'miercoles' },
+    { name: 'Jueves', slug: 'jueves' },
+    { name: 'Viernes', slug: 'viernes' },
+    { name: 'Sábado', slug: 'sabado' },
+    { name: 'Domingo', slug: 'domingo' },
+  ];
+  
+  for (const municipality of MUNICIPALITIES) {
+    for (const day of daysArray) {
+      paths.push({
+        params: { 
+          municipality: municipality.slug,
+          day: day.slug 
+        },
+        props: { 
+          municipality,
+          day 
+        },
+      });
+    }
+  }
+  
+  return paths;
+}
+
+const { municipality, day } = Astro.props;
+const municipalityData = getMunicipalityBySlug(municipality.slug);
+const dayName = days.find(d => d.slug === day.slug)?.name || day.slug;
+
+if (!municipalityData) {
+  return Astro.redirect('/');
+}
+
+// Get filtered tianguis for this municipality and day
+const tianguis = await TianguisService.getTianguis({ 
+  municipality: municipalityData.slug,
+  day: day.slug as any,
+  state: 'jalisco'
+});
+
+// Prepare data for map
+const tianguisData = tianguis.map(t => ({
+  name: t.name,
+  lat: t.lat,
+  lng: t.lng,
+  day: t.day,
+  municipality: t.municipality,
+  location: t.location,
+  direccion: t.location.type === 'address' ? t.location.direccion : null,
+  street1: t.location.type === 'streets' ? t.location.street1 : null,
+  street2: t.location.type === 'streets' ? t.location.street2 : null,
+}));
+---
+
+<WithSidebar 
+  title={`Tianguis los ${dayName} en ${municipalityData.name} - Tianguis GDL`}
+  description={`Tianguis que operan los ${dayName.toLowerCase()} en ${municipalityData.name}, ${municipalityData.state}`}
+>
+  <div class="hidden md:flex flex-1 sticky top-0 h-screen p-4">
+    <div class="w-full max-w-3xs shrink-0 h-full">
+      <div class="h-full rounded-2xl dark:bg-gray-800 border-gray-100 dark:border-gray-700 p-2 flex flex-col min-h-0">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2 dark:text-gray-100">
+          Tianguis los {dayName}
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          {municipalityData.name}, {municipalityData.state}
+        </p>
+        <p class="text-gray-600 dark:text-gray-300">
+          {tianguisData.length} resultados
+        </p>
+        <div class="mt-6 min-h-0 flex-1 overflow-y-auto pr-2">
+          <TianguisList municipality={municipalityData.slug} day={day.slug} />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
+      <Map client:only="vue" tianguis={tianguisData} initialZoom={13} />
+    </div>
+  </div>
+</WithSidebar>
+
+<script>
+  // Check if viewport is mobile (< 768px based on Tailwind's md breakpoint)
+  function isMobile() {
+    return window.innerWidth < 768;
+  }
+
+  // Redirect to home if mobile
+  function checkAndRedirect() {
+    if (isMobile()) {
+      window.location.href = '/';
+    }
+  }
+
+  // Check on initial load
+  checkAndRedirect();
+
+  // Listen for resize events with debouncing
+  let resizeTimer: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      checkAndRedirect();
+    }, 250);
+  });
+</script>

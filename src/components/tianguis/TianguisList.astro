@@ -1,0 +1,84 @@
+---
+import { TianguisService } from '../../services/tianguis';
+import type { Tianguis } from '../../types/tianguis';
+import TianguisListCard from './TianguisListCard.astro';
+
+interface Props {
+  municipality?: string;
+  day?: string;
+}
+
+const { municipality, day } = Astro.props;
+
+// Fetch tianguis data based on filters
+let tianguis: Tianguis[] = [];
+
+if (municipality && day) {
+  // Both filters: specific municipality and day
+  tianguis = await TianguisService.getTianguis({ 
+    municipality, 
+    day: day as any,
+    state: 'jalisco'
+  });
+} else if (municipality) {
+  // Only municipality: all days for that municipality
+  tianguis = await TianguisService.getTianguisByMunicipality('jalisco', municipality);
+} else if (day) {
+  // Only day: all municipalities for that day
+  tianguis = await TianguisService.getTianguis({ 
+    day: day as any,
+    state: 'jalisco'
+  });
+} else {
+  // No filters: default to guadalajara
+  tianguis = await TianguisService.getTianguisByMunicipality('jalisco', 'guadalajara');
+}
+---
+
+<div class="grid gap-4 md:grid-cols-1" data-tianguis-list>
+  {tianguis.map((t: Tianguis) => (
+    <TianguisListCard tianguis={t} />
+  ))}
+</div>
+
+{tianguis.length === 0 && (
+  <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+    <p class="text-lg">No se encontraron tianguis</p>
+  </div>
+)}
+
+<script is:inline>
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const button = target.closest(".js-focus-map-btn");
+
+    if (!(button instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const lat = Number(button.dataset.focusLat);
+    const lng = Number(button.dataset.focusLng);
+    const id = button.dataset.focusId;
+    const name = button.dataset.focusName;
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+      return;
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("tianguis:focus-map", {
+        detail: {
+          id,
+          name,
+          lat,
+          lng,
+        },
+      })
+    );
+  });
+</script>

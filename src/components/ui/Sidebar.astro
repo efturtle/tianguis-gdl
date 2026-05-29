@@ -1,0 +1,121 @@
+---
+import { MUNICIPALITIES } from '../../config/municipalities';
+import DarkModeToggle from './DarkModeToggle.vue';
+
+const days = [
+  { name: 'Lunes', slug: 'lunes' },
+  { name: 'Martes', slug: 'martes' },
+  { name: 'Miércoles', slug: 'miercoles' },
+  { name: 'Jueves', slug: 'jueves' },
+  { name: 'Viernes', slug: 'viernes' },
+  { name: 'Sábado', slug: 'sabado' },
+  { name: 'Domingo', slug: 'domingo' },
+];
+
+const cities = MUNICIPALITIES.map(m => ({
+  name: m.name,
+  slug: m.slug
+}));
+
+const currentPath = Astro.url.pathname;
+
+// Determine current municipality from path
+const pathParts = currentPath.split('/').filter(Boolean);
+const currentMunicipality = cities.find(c => pathParts[0] === c.slug);
+const currentDay = days.find(d => pathParts.includes(d.slug));
+
+// Build day links based on current context
+const getDayLink = (daySlug: string) => {
+  if (currentMunicipality) {
+    // User is on a municipality page, link to municipality + day
+    return `/${currentMunicipality.slug}/${daySlug}`;
+  } else {
+    // User is on home or day page, link to day across all municipalities
+    return `/day/${daySlug}`;
+  }
+};
+---
+
+<aside class="w-64 sticky top-0 h-screen p-4">
+  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 h-full overflow-y-auto border border-gray-100 dark:border-gray-700">
+    <!-- Logo/Header -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            Tianguis GDL
+          </a>
+        </h2>
+        <DarkModeToggle client:load />
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Encuentra tianguis cerca de ti</p>
+    </div>
+
+    <!-- Clear selections -->
+    <div class="mb-8">
+      <button
+        class="w-full px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+        onclick="window.location.href='/'"
+      >
+        Limpiar selecciones
+      </button>
+    </div>
+
+    <!-- Cities Section -->
+    <div class="mb-8">
+      <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+        Ciudades
+      </h3>
+      <nav class="space-y-1">
+        {cities.map((city) => (
+          <a
+            href={`/${city.slug}`}
+            class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              currentPath.includes(city.slug)
+                ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100'
+            }`}
+          >
+            {city.name}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Days Section -->
+    <div class="mb-8">
+      <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+        Días de la semana
+      </h3>
+      <nav class="space-y-1">
+        {days.map((day) => (
+          <a
+            href={getDayLink(day.slug)}
+            class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              currentDay?.slug === day.slug
+                ? 'bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300'
+                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100'
+            }`}
+          >
+            {day.name}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="text-xs text-gray-500 dark:text-gray-400 space-y-2">
+        <a href="/mapa" class="block hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+          🗺️ Ver Mapa
+        </a>
+        <a href="/about" class="block hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+          Acerca de
+        </a>
+        <a href="/contact" class="block hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+          Contacto
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
