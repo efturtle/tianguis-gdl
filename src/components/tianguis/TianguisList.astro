@@ -35,7 +35,7 @@ if (municipality && day) {
 }
 ---
 
-<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+<div class="grid gap-4 md:grid-cols-1" data-tianguis-list>
   {tianguis.map((t: Tianguis) => (
     <TianguisListCard tianguis={t} />
   ))}
@@ -46,3 +46,39 @@ if (municipality && day) {
     <p class="text-lg">No se encontraron tianguis</p>
   </div>
 )}
+
+<script is:inline>
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const button = target.closest(".js-focus-map-btn");
+
+    if (!(button instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const lat = Number(button.dataset.focusLat);
+    const lng = Number(button.dataset.focusLng);
+    const id = button.dataset.focusId;
+    const name = button.dataset.focusName;
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+      return;
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("tianguis:focus-map", {
+        detail: {
+          id,
+          name,
+          lat,
+          lng,
+        },
+      })
+    );
+  });
+</script>

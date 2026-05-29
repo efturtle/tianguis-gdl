@@ -9,13 +9,12 @@
     <mgl-navigation-control position="top-right" />
     <mgl-geolocate-control position="top-right" />
     <mgl-scale-control position="bottom-left" />
-    
+
     <!-- Markers for each tianguis with coordinates -->
-    <mgl-marker 
-      v-for="(tianguis, index) in tianguisWithCoords" 
+    <mgl-marker
+      v-for="(tianguis, index) in tianguisWithCoords"
       :key="`${tianguis.name}-${index}`"
       :coordinates="[tianguis.lng, tianguis.lat]"
-      color="#3B82F6"
     >
       <mgl-popup :offset="25">
         <TianguisPopup :tianguis="tianguis" />
@@ -33,7 +32,7 @@ import {
   MglMarker,
   MglPopup,
 } from '@indoorequal/vue-maplibre-gl';
-import { computed, onMounted, watch, ref } from 'vue';
+import { computed, onMounted, onUnmounted, watch, ref } from 'vue';
 import TianguisPopup from './TianguisPopup.vue';
 
 // Props
@@ -67,29 +66,71 @@ const center = computed(() => {
   return props.initialCenter;
 });
 const zoom = props.initialZoom;
+const map = ref(null);
+const selectedMarkerId = ref(null);
 
 // Filter tianguis that have coordinates
 const tianguisWithCoords = computed(() => {
-  return props.tianguis.filter(t => t.lat && t.lng);
+  return props.tianguis.filter((t) => t.lat && t.lng);
 });
+
+function getTianguisId(tianguis) {
+  return `${tianguis.name}-${tianguis.lat}-${tianguis.lng}`;
+}
+
+function focusMarker({ id, lat, lng }) {
+  if (!map.value || !Number.isFinite(lat) || !Number.isFinite(lng)) {
+    return;
+  }
+
+  if (id) {
+    selectedMarkerId.value = id;
+  } else {
+    const selected = tianguisWithCoords.value.find(
+      (t) => t.lat === lat && t.lng === lng
+    );
+
+    if (selected) {
+      selectedMarkerId.value = getTianguisId(selected);
+    }
+  }
+
+  map.value.flyTo({
+    center: [lng, lat],
+    zoom: 14,
+    duration: 1000,
+    essential: true,
+  });
+}
+
+function onFocusMap(event) {
+  const detail = event?.detail;
+
+  if (!detail) {
+    return;
+  }
+
+  focusMarker(detail);
+}
 
 // Map load handler
 function onMapLoad(event) {
+  map.value = event.map;
   console.log(`Map loaded with ${tianguisWithCoords.value.length} markers`);
-  
+
   // Fit bounds to show all markers if we have multiple
   if (tianguisWithCoords.value.length > 1 && event.map) {
     // Create bounds from all tianguis coordinates
-    const coordinates = tianguisWithCoords.value.map(t => [t.lng, t.lat]);
-    
+    const coordinates = tianguisWithCoords.value.map((t) => [t.lng, t.lat]);
+
     // Calculate bounding box
-    const lngs = coordinates.map(c => c[0]);
-    const lats = coordinates.map(c => c[1]);
+    const lngs = coordinates.map((c) => c[0]);
+    const lats = coordinates.map((c) => c[1]);
     const bounds = [
       [Math.min(...lngs), Math.min(...lats)], // Southwest
       [Math.max(...lngs), Math.max(...lats)]  // Northeast
     ];
-    
+
     event.map.fitBounds(bounds, { padding: 50, maxZoom: 14 });
   }
 }
@@ -101,9 +142,13 @@ watch(() => props.tianguis, (newTianguis) => {
   console.log(`📊 Tianguis stats: ${withCoords} with coords, ${withoutCoords} without coords`);
 }, { immediate: true });
 
+let observer;
+
 onMounted(() => {
+  window.addEventListener('tianguis:focus-map', onFocusMap);
+
   // Watch for dark mode changes
-  const observer = new MutationObserver(() => {
+  observer = new MutationObserver(() => {
     const newIsDark = document.documentElement.classList.contains('dark');
     if (newIsDark !== isDarkMode.value) {
       isDarkMode.value = newIsDark;
@@ -117,6 +162,14 @@ onMounted(() => {
     attributes: true,
     attributeFilter: ['class'],
   });
+});
+
+onUnmounted(() => {
+  window.removeEventListener('tianguis:focus-map', onFocusMap);
+
+  if (observer) {
+    observer.disconnect();
+  }
 });
 
 </script>

@@ -73,65 +73,32 @@ const tianguisData = tianguis.map(t => ({
   street1: t.location.type === 'streets' ? t.location.street1 : null,
   street2: t.location.type === 'streets' ? t.location.street2 : null,
 }));
-
-const tianguisWithCoords = tianguisData.filter(t => t.lat && t.lng).length;
 ---
 
 <WithSidebar 
   title={`Tianguis los ${dayName} en ${municipalityData.name} - Tianguis GDL`}
   description={`Tianguis que operan los ${dayName.toLowerCase()} en ${municipalityData.name}, ${municipalityData.state}`}
 >
-  <div class="max-w-7xl">
-    <div class="mb-6">
-      <div class="flex gap-2 mb-3">
-        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-          {municipalityData.name}
-        </span>
-        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
-          {dayName}
-        </span>
-      </div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-2 dark:text-gray-100">
-        Tianguis los {dayName}
-      </h1>
-      <p class="text-lg text-gray-600 mb-4 dark:text-gray-300">
-        {municipalityData.name}, {municipalityData.state}
-      </p>
-      
-      <div class="flex items-center justify-between">
-        <div class="text-sm text-gray-600 dark:text-gray-400">
-          📍 {tianguisWithCoords} tianguis en el mapa
-        </div>
-        
-        <div class="flex gap-3 text-sm">
-          <a 
-            href={`/${municipalityData.slug}`}
-            class="text-blue-600 hover:text-blue-800 hover:underline dark:hover:text-blue-400"
-          >
-            ← Todos los días
-          </a>
-          <span class="text-gray-400 dark:text-gray-600">|</span>
-          <a 
-            href={`/day/${day.slug}`}
-            class="text-blue-600 hover:text-blue-800 hover:underline dark:hover:text-blue-400"
-          >
-            Todos los municipios →
-          </a>
+  <div class="hidden md:flex flex-1 sticky top-0 h-screen p-4">
+    <div class="w-full max-w-3xs shrink-0 h-full">
+      <div class="h-full rounded-2xl dark:bg-gray-800 border-gray-100 dark:border-gray-700 p-2 flex flex-col min-h-0">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2 dark:text-gray-100">
+          Tianguis los {dayName}
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          {municipalityData.name}, {municipalityData.state}
+        </p>
+        <p class="text-gray-600 dark:text-gray-300">
+          {tianguisData.length} resultados
+        </p>
+        <div class="mt-6 min-h-0 flex-1 overflow-y-auto pr-2">
+          <TianguisList municipality={municipalityData.slug} day={day.slug} />
         </div>
       </div>
     </div>
 
-    <!-- Map Section -->
-    <div class="mb-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4" style="height: 450px;">
+    <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
       <Map client:only="vue" tianguis={tianguisData} initialZoom={13} />
-    </div>
-
-    <!-- List Section -->
-    <div class="mb-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4 dark:text-gray-100">
-        Lista de Tianguis
-      </h2>
-      <TianguisList municipality={municipalityData.slug} day={day.slug} />
     </div>
   </div>
 </WithSidebar>

@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { tianguis: t } = Astro.props;
+const hasCoordinates = Number.isFinite(t.lat) && Number.isFinite(t.lng) && t.lat !== 0 && t.lng !== 0;
+const mapFocusId = `${t.name}-${t.lat}-${t.lng}`;
 ---
 
 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow border border-gray-100 dark:border-gray-700">
@@ -31,4 +33,17 @@ const { tianguis: t } = Astro.props;
       {t.municipality.charAt(0).toUpperCase() + t.municipality.slice(1)}, {t.state}
     </p>
   </div>
+
+  {hasCoordinates && (
+    <button
+      type="button"
+      class="js-focus-map-btn mt-4 w-full px-3 py-2 rounded-md text-sm font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
+      data-focus-id={mapFocusId}
+      data-focus-name={t.name}
+      data-focus-lat={String(t.lat)}
+      data-focus-lng={String(t.lng)}
+    >
+      Ver en mapa
+    </button>
+  )}
 </div>

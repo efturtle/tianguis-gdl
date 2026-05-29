@@ -1,23 +1,41 @@
 <template>
-  <div class="tianguis-popup">
-    <h3 class="popup-title">{{ tianguis.name }}</h3>
-    <div class="popup-content">
-      <p class="popup-location">
-        <strong>📍 Ubicación:</strong><br />
+  <div class="font-sans max-w-70 dark:bg-gray-900">
+    <h3 class="text-base font-bold text-gray-800 dark:text-gray-100 m-0 mb-3 pb-2 border-b-2 border-blue-500 dark:border-blue-400">
+      {{ tianguis.name }}
+    </h3>
+    
+    <div class="text-[13px]">
+      <p class="my-2 mb-3 text-gray-600 dark:text-gray-400 leading-relaxed">
+        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5">📍 Ubicación:</strong><br />
         {{ formatLocation(tianguis) }}
       </p>
-      <p class="popup-day">
-        <strong>📅 Día:</strong> <span class="day-badge">{{ capitalizeDay(tianguis.day) }}</span>
+      
+      <p class="my-2 text-gray-600 dark:text-gray-400 leading-relaxed">
+        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5">📅 Día:</strong> 
+        <span class="inline-block bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-300 px-2 py-0.5 rounded font-semibold text-xs ml-1">
+          {{ capitalizeDay(tianguis.day) }}
+        </span>
       </p>
-      <p class="popup-municipality">
-        <strong>🏙️ Municipio:</strong> {{ capitalizeMunicipality(tianguis.municipality) }}
+      
+      <p class="my-2 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5 text-[13px]">🏙️ Municipio:</strong> 
+        {{ capitalizeMunicipality(tianguis.municipality) }}
       </p>
+
+      <a 
+        :href="getGoogleMapsUrl(tianguis)" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="mt-4 block w-full text-center bg-blue-50 hover:bg-blue-100 dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-600 dark:text-blue-400 font-semibold py-2 px-3 rounded-md transition-colors border border-blue-200 dark:border-gray-600 text-[13px]"
+      >
+        🗺️ Ver en Google Maps
+      </a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { DayOfWeek } from '../types/tianguis';
+import type { DayOfWeek } from '../../types/tianguis';
 
 interface Props {
   tianguis: any;
@@ -52,79 +70,13 @@ function capitalizeDay(day: DayOfWeek): string {
 }
 
 function capitalizeMunicipality(municipality: string): string {
+  if (!municipality) return '';
   return municipality.charAt(0).toUpperCase() + municipality.slice(1);
 }
+
+// Generates a Google Maps search URL based on the location and municipality
+function getGoogleMapsUrl(tianguis: any): string {  
+  const url = `https://www.google.com/maps/search/?api=1&query=${tianguis.lat},${tianguis.lng}`;
+  return url;
+}
 </script>
-
-<style scoped>
-.tianguis-popup {
-  font-family: system-ui, -apple-system, sans-serif;
-  max-width: 280px;
-}
-
-.popup-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0 0 12px 0;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #3b82f6;
-}
-
-:global(.dark) .popup-title {
-  color: rgb(243 244 246);
-  border-bottom-color: rgb(96 165 250);
-}
-
-.popup-content {
-  font-size: 13px;
-}
-
-.popup-content p {
-  margin: 8px 0;
-  color: #4b5563;
-  line-height: 1.5;
-}
-
-:global(.dark) .popup-content p {
-  color: rgb(156 163 175);
-}
-
-.popup-content strong {
-  color: #1f2937;
-  display: inline-block;
-  margin-bottom: 2px;
-}
-
-:global(.dark) .popup-content strong {
-  color: rgb(209 213 219);
-}
-
-.popup-location {
-  margin-bottom: 12px;
-}
-
-.day-badge {
-  display: inline-block;
-  background: #dbeafe;
-  color: #1e40af;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 12px;
-}
-
-:global(.dark) .day-badge {
-  background: rgba(59, 130, 246, 0.2);
-  color: rgb(147, 197, 253);
-}
-
-.popup-municipality {
-  color: #6b7280;
-  font-size: 12px;
-}
-
-:global(.dark) .popup-municipality {
-  color: rgb(156 163 175);
-}
-</style>
