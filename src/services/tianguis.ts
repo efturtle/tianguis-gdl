@@ -17,6 +17,12 @@ const DATA_SOURCE: 'local' | 'api' = 'local';
 const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000/api';
 
 /**
+ * Import all JSON files from the data directory
+ * This is required for production builds to work correctly
+ */
+const dataFiles = import.meta.glob<LocalTianguisData>('../data/*.json', { eager: true, import: 'default' });
+
+/**
  * Main service class for fetching tianguis data
  * This abstraction allows easy switching between local JSON and backend API
  */
@@ -77,10 +83,14 @@ export class TianguisService {
     municipality: string
   ): Promise<Tianguis[]> {
     try {
-      // Dynamically import the JSON file
-      const data: LocalTianguisData = await import(
-        `../data/${municipality}.json`
-      ).then((module) => module.default);
+      // Get the data from the pre-loaded files
+      const dataPath = `../data/${municipality}.json`;
+      const data = dataFiles[dataPath];
+
+      if (!data) {
+        console.error(`No data found for ${municipality}`);
+        return [];
+      }
 
       return this.normalizeLocalData(data, state, municipality);
     } catch (error) {
