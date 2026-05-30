@@ -37,10 +37,11 @@ const tianguisData = tianguis.map(t => ({
   lng: t.lng,
   day: t.day,
   municipality: t.municipality,
+  state: t.state,
   location: t.location,
   direccion: t.location.type === 'address' ? t.location.direccion : null,
   street1: t.location.type === 'streets' ? t.location.street1 : null,
-  street2: t.location.type === 'streets' ? t.location.street2 : null,
+  street2: t.location.type === 'streets' ? t.location.street2 : null, 
 }));
 
 const tianguisWithCoords = tianguisData.filter(t => t.lat && t.lng).length;
@@ -66,7 +67,7 @@ const tianguisWithCoords = tianguisData.filter(t => t.lat && t.lng).length;
 
     <!-- Map Section -->
     <div class="mb-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4" style="height: 500px;">
-      <Map client:only="vue" tianguis={tianguisData} initialZoom={12} />
+      <Map tianguis={tianguisData} client:only="vue" initialZoom={12} />
     </div>
 
     <!-- List Section -->

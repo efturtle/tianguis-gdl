@@ -91,6 +91,7 @@ export class TianguisService {
   ): Promise<Tianguis[]> {
     try {
       // Get the data from the pre-loaded files using municipality slug as key
+      console.log(`Loading local data for municipality: ${municipality}`);
       const data = dataFiles[municipality];
 
       if (!data) {
@@ -192,7 +193,7 @@ export class TianguisService {
         });
       }
     }
-
+    console.log(`Loaded ${tianguis.length} tianguis for municipality: ${municipality}`);
     return tianguis;
   }
 

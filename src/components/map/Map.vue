@@ -23,7 +23,7 @@
   </mgl-map>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   MglMap,
   MglNavigationControl,
@@ -34,6 +34,7 @@ import {
 } from '@indoorequal/vue-maplibre-gl';
 import { computed, onMounted, onUnmounted, watch, ref } from 'vue';
 import TianguisPopup from './TianguisPopup.vue';
+import type { Tianguis } from '../../types/tianguis';
 
 // Disable automatic attribute inheritance to prevent warnings with MglMap
 defineOptions({
@@ -41,19 +42,12 @@ defineOptions({
 });
 
 // Props
-const props = defineProps({
-  tianguis: {
-    type: Array,
-    default: () => []
-  },
-  initialCenter: {
-    type: Array,
-    default: () => [-103.3496, 20.6597] // Guadalajara center
-  },
-  initialZoom: {
-    type: Number,
-    default: 12
-  }
+const props = withDefaults(defineProps<{
+  tianguis: Tianguis[];
+  initialZoom?: number;
+}>(), {
+  tianguis: () => [],
+  initialZoom: 12
 });
 
 // Reactive map style that switches based on dark mode
@@ -63,27 +57,27 @@ const style = ref(
     ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
     : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
 );
-const center = computed(() => {
+const center = computed((): [number, number] => {
   // If we have tianguis with coords, center on the first one
   if (props.tianguis.length > 0 && props.tianguis[0].lat && props.tianguis[0].lng) {
     return [props.tianguis[0].lng, props.tianguis[0].lat];
   }
-  return props.initialCenter;
+  return [-103.3496, 20.6597]; // Default to Guadalajara center
 });
 const zoom = props.initialZoom;
-const map = ref(null);
-const selectedMarkerId = ref(null);
+const map = ref<any>(null);
+const selectedMarkerId = ref<string | null>(null);
 
 // Filter tianguis that have coordinates
 const tianguisWithCoords = computed(() => {
   return props.tianguis.filter((t) => t.lat && t.lng);
 });
 
-function getTianguisId(tianguis) {
+function getTianguisId(tianguis: Tianguis) {
   return `${tianguis.name}-${tianguis.lat}-${tianguis.lng}`;
 }
 
-function focusMarker({ id, lat, lng }) {
+function focusMarker({ id, lat, lng }: { id?: string; lat: number; lng: number }) {
   if (!map.value || !Number.isFinite(lat) || !Number.isFinite(lng)) {
     return;
   }
@@ -108,8 +102,8 @@ function focusMarker({ id, lat, lng }) {
   });
 }
 
-function onFocusMap(event) {
-  const detail = event?.detail;
+function onFocusMap(event: Event) {
+  const detail = (event as CustomEvent<{ id?: string; lat: number; lng: number }>)?.detail;
 
   if (!detail) {
     return;
@@ -119,7 +113,7 @@ function onFocusMap(event) {
 }
 
 // Map load handler
-function onMapLoad(event) {
+function onMapLoad(event: { map: any }) {
   map.value = event.map;
   console.log(`Map loaded with ${tianguisWithCoords.value.length} markers`);
 
@@ -147,7 +141,7 @@ watch(() => props.tianguis, (newTianguis) => {
   console.log(`📊 Tianguis stats: ${withCoords} with coords, ${withoutCoords} without coords`);
 }, { immediate: true });
 
-let observer;
+let observer: MutationObserver;
 
 onMounted(() => {
   window.addEventListener('tianguis:focus-map', onFocusMap);

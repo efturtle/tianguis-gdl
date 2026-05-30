@@ -3,10 +3,6 @@ import Base from '../layouts/base.astro';
 import MobileMap from '../components/map/MobileMap.vue';
 import { TianguisService } from '../services/tianguis';
 
-// Get URL parameters for page metadata
-const url = new URL(Astro.request.url);
-const focusName = url.searchParams.get('name') || null;
-
 // Get all tianguis from both municipalities for the map
 const allTianguis = await TianguisService.getTianguis({ state: 'jalisco' });
 
@@ -17,6 +13,7 @@ const tianguisData = allTianguis.map(t => ({
   lng: t.lng,
   day: t.day,
   municipality: t.municipality,
+  state: t.state,
   location: t.location,
   // Flatten location for easier access
   direccion: t.location.type === 'address' ? t.location.direccion : null,
@@ -26,12 +23,8 @@ const tianguisData = allTianguis.map(t => ({
   street4: t.location.type === 'streets' ? t.location.street4 : null,
 }));
 
-const pageTitle = focusName 
-  ? `${focusName} - Mapa de Tianguis` 
-  : 'Mapa de Tianguis - Tianguis GDL';
-const pageDescription = focusName
-  ? `Ubicación de ${focusName} en el mapa`
-  : 'Visualiza todos los tianguis de Guadalajara y Zapopan en el mapa';
+const pageTitle = 'Mapa de Tianguis - Tianguis GDL';
+const pageDescription = 'Visualiza todos los tianguis de Guadalajara y Zapopan en el mapa';
 ---
 
 <Base 
@@ -39,8 +32,8 @@ const pageDescription = focusName
   description={pageDescription}
 >
   <MobileMap 
-    client:only="vue"
     tianguis={tianguisData}
+    client:only="vue"
   />
 </Base>
 

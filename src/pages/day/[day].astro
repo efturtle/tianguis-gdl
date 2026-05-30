@@ -47,6 +47,7 @@ const tianguisData = tianguis.map((t) => ({
   day: t.day,
   municipality: t.municipality,
   location: t.location,
+  state: t.state,
   direccion: t.location.type === "address" ? t.location.direccion : null,
   street1: t.location.type === "streets" ? t.location.street1 : null,
   street2: t.location.type === "streets" ? t.location.street2 : null,
@@ -79,7 +80,7 @@ const dayName = days.find((d) => d.slug === day.slug)?.name || day.slug;
     </div>
 
     <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
-      <Map client:only="vue" tianguis={tianguisData} initialZoom={13} />
+      <Map tianguis={tianguisData} client:only="vue" initialZoom={13} />
     </div>
   </div>
 </WithSidebar>

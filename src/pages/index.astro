@@ -3,7 +3,6 @@ import Base from '../layouts/base.astro';
 import Sidebar from '../components/ui/Sidebar.astro';
 import SearchDashboard from '../components/ui/SearchDashboard.vue';
 import Map from '../components/map/Map.vue';
-import { MUNICIPALITIES } from '../config/municipalities';
 ---
 
 <Base title="Tianguis GDL - Encuentra tianguis cerca de ti">
@@ -59,7 +58,7 @@ import { MUNICIPALITIES } from '../config/municipalities';
                 </div>
             </div>
             <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
-                <Map :tianguis={[]} client:only="vue" />
+                <Map tianguis={[]} client:only="vue" />
             </div>
         </div>
     </div>
