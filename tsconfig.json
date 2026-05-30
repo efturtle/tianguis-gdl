@@ -1,9 +1,9 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "src/env.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
     "jsx": "preserve",
-    "types": ["node"]
+    "types": ["node", "@vue/runtime-core"]
   }
 }

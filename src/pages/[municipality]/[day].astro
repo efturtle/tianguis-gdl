@@ -35,10 +35,6 @@ export function getStaticPaths() {
           municipality: municipality.slug,
           day: day.slug 
         },
-        props: { 
-          municipality,
-          day 
-        },
       });
     }
   }
@@ -46,18 +42,27 @@ export function getStaticPaths() {
   return paths;
 }
 
-const { municipality, day } = Astro.props;
-const municipalityData = getMunicipalityBySlug(municipality.slug);
-const dayName = days.find(d => d.slug === day.slug)?.name || day.slug;
+// Get municipality and day from params, not props
+const { municipality: municipalitySlug, day: daySlug } = Astro.params;
+
+// Validate params exist
+if (!municipalitySlug || !daySlug) {
+  console.error('Missing params:', { municipalitySlug, daySlug });
+  return Astro.redirect('/');
+}
+
+const municipalityData = getMunicipalityBySlug(municipalitySlug);
+const dayName = days.find(d => d.slug === daySlug)?.name || daySlug;
 
 if (!municipalityData) {
+  console.error('Municipality not found:', municipalitySlug);
   return Astro.redirect('/');
 }
 
 // Get filtered tianguis for this municipality and day
 const tianguis = await TianguisService.getTianguis({ 
   municipality: municipalityData.slug,
-  day: day.slug as any,
+  day: daySlug as any,
   state: 'jalisco'
 });
 
@@ -92,7 +97,7 @@ const tianguisData = tianguis.map(t => ({
           {tianguisData.length} resultados
         </p>
         <div class="mt-6 min-h-0 flex-1 overflow-y-auto pr-2">
-          <TianguisList municipality={municipalityData.slug} day={day.slug} />
+          <TianguisList municipality={municipalityData.slug} day={daySlug} />
         </div>
       </div>
     </div>

@@ -8,14 +8,22 @@ import { TianguisService } from '../../services/tianguis';
 export function getStaticPaths() {
   return MUNICIPALITIES.map((municipality) => ({
     params: { municipality: municipality.slug },
-    props: { municipality },
   }));
 }
 
-const { municipality } = Astro.props;
-const municipalityData = getMunicipalityBySlug(municipality.slug);
+// Get municipality from params, not props
+const { municipality: municipalitySlug } = Astro.params;
+
+// Validate param exists
+if (!municipalitySlug) {
+  console.error('Missing municipality param');
+  return Astro.redirect('/');
+}
+
+const municipalityData = getMunicipalityBySlug(municipalitySlug);
 
 if (!municipalityData) {
+  console.error('Municipality not found:', municipalitySlug);
   return Astro.redirect('/');
 }
 
