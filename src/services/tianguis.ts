@@ -9,6 +9,10 @@ import type {
 import { MUNICIPALITIES } from '../config/municipalities';
 import { normalizeForSearch } from '../utils/text';
 
+// Import JSON data files directly
+import guadalajaraData from '../data/guadalajara.json';
+import zapopanData from '../data/zapopan.json';
+
 /**
  * Configuration for data source
  * Change this to 'api' when backend is ready
@@ -17,10 +21,13 @@ const DATA_SOURCE: 'local' | 'api' = 'local';
 const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000/api';
 
 /**
- * Import all JSON files from the data directory
- * This is required for production builds to work correctly
+ * Map of municipality data
+ * Using direct imports ensures data is bundled correctly in all environments
  */
-const dataFiles = import.meta.glob<LocalTianguisData>('../data/*.json', { eager: true, import: 'default' });
+const dataFiles: Record<string, LocalTianguisData> = {
+  'guadalajara': guadalajaraData,
+  'zapopan': zapopanData,
+};
 
 /**
  * Main service class for fetching tianguis data
@@ -83,12 +90,12 @@ export class TianguisService {
     municipality: string
   ): Promise<Tianguis[]> {
     try {
-      // Get the data from the pre-loaded files
-      const dataPath = `../data/${municipality}.json`;
-      const data = dataFiles[dataPath];
+      // Get the data from the pre-loaded files using municipality slug as key
+      const data = dataFiles[municipality];
 
       if (!data) {
-        console.error(`No data found for ${municipality}`);
+        console.error(`No data found for municipality: ${municipality}`);
+        console.error(`Available municipalities:`, Object.keys(dataFiles));
         return [];
       }
 
