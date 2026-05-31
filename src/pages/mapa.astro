@@ -15,6 +15,7 @@ const tianguisData = allTianguis.map(t => ({
   municipality: t.municipality,
   state: t.state,
   location: t.location,
+  distance: 0,
   // Flatten location for easier access
   direccion: t.location.type === 'address' ? t.location.direccion : null,
   street1: t.location.type === 'streets' ? t.location.street1 : null,

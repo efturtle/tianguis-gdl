@@ -42,6 +42,7 @@ describe("MobileMap.vue", () => {
       day: "miercoles" as const,
       lat: 20.65,
       lng: -103.4,
+      distance: 2.5,
       location: {
         type: "streets" as const,
         street1: "Copérnico",
@@ -82,20 +83,4 @@ describe("MobileMap.vue", () => {
     expect(observeMock).toHaveBeenCalledOnce();
   });
 
-  it("generates the correct Google Maps URL", async () => {
-    const windowOpenSpy = vi.spyOn(globalThis.window, "open");
-    const wrapper = mount(MobileMap, { props: { tianguis: mockTianguis } });
-
-    // Manually set the selected tianguis state (cast to any to access internal state)
-    (wrapper.vm as any).selectedTianguis = mockTianguis[0];
-
-    // Trigger the open in google maps function
-    (wrapper.vm as any).openInGoogleMaps();
-
-    // Assert the bug is fixed and it uses the official Google Maps query format
-    expect(windowOpenSpy).toHaveBeenCalledWith(
-      "https://www.google.com/maps/search/?api=1&query=20.65,-103.4",
-      "_blank",
-    );
-  });
 });

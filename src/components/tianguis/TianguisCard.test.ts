@@ -94,7 +94,7 @@ describe("TianguisCard.vue", () => {
 
     // Check if the href attribute was constructed correctly
     expect(link.attributes("href")).toBe(
-      "/mapa?lat=20.67&lng=-103.34&name=Tianguis%205%20de%20Mayo",
+      "/mapa?lat=20.67&lng=-103.34",
     );
   });
 });

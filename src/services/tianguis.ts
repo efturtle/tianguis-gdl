@@ -1,5 +1,5 @@
 import type {
-  Tianguis,
+  TianguisWithDistance,
   TianguisQuery,
   LocalTianguisData,
   ApiTianguisResponse,
@@ -40,7 +40,7 @@ export class TianguisService {
   static async getTianguisByMunicipality(
     state: string,
     municipality: string
-  ): Promise<Tianguis[]> {
+  ): Promise<TianguisWithDistance[]> {
     if (DATA_SOURCE === 'local') {
       return this.getLocalData(state, municipality);
     } else {
@@ -51,11 +51,11 @@ export class TianguisService {
   /**
    * Get tianguis filtered by query parameters
    */
-  static async getTianguis(query: TianguisQuery = {}): Promise<Tianguis[]> {
+  static async getTianguis(query: TianguisQuery = {}): Promise<TianguisWithDistance[]> {
     if (DATA_SOURCE === 'local') {
       const { municipality, state = 'jalisco' } = query;
       
-      let data: Tianguis[] = [];
+      let data: TianguisWithDistance[] = [];
       
       if (municipality) {
         // Load single municipality
@@ -77,7 +77,7 @@ export class TianguisService {
   static async getTianguisByDay(
     day: DayOfWeek,
     municipality?: string
-  ): Promise<Tianguis[]> {
+  ): Promise<TianguisWithDistance[]> {
     const data = await this.getTianguis({ day, municipality });
     return data;
   }
@@ -88,7 +88,7 @@ export class TianguisService {
   private static async getLocalData(
     state: string,
     municipality: string
-  ): Promise<Tianguis[]> {
+  ): Promise<TianguisWithDistance[]> {
     try {
       // Get the data from the pre-loaded files using municipality slug as key
       console.log(`Loading local data for municipality: ${municipality}`);
@@ -110,8 +110,8 @@ export class TianguisService {
   /**
    * Fetch data from all municipalities in a state
    */
-  private static async getAllLocalData(state: string): Promise<Tianguis[]> {
-    const allTianguis: Tianguis[] = [];
+  private static async getAllLocalData(state: string): Promise<TianguisWithDistance[]> {
+    const allTianguis: TianguisWithDistance[] = [];
     
     // Get all municipalities for the state
     const municipalities = MUNICIPALITIES.filter(m => m.stateSlug === state);
@@ -128,7 +128,7 @@ export class TianguisService {
   /**
    * Fetch data from backend API (future implementation)
    */
-  private static async getApiData(query: TianguisQuery): Promise<Tianguis[]> {
+  private static async getApiData(query: TianguisQuery): Promise<TianguisWithDistance[]> {
     try {
       const params = new URLSearchParams();
       if (query.state) params.append('state', query.state);
@@ -143,7 +143,10 @@ export class TianguisService {
         throw new Error('API request failed');
       }
 
-      return result.data.tianguis;
+      return result.data.tianguis.map((t) => ({
+        ...t,
+        distance: 0 // Default to 0 if not provided
+      }));
     } catch (error) {
       console.error('Failed to fetch from API:', error);
       return [];
@@ -157,8 +160,8 @@ export class TianguisService {
     data: LocalTianguisData,
     state: string,
     municipality: string
-  ): Tianguis[] {
-    const tianguis: Tianguis[] = [];
+  ): TianguisWithDistance[] {
+    const tianguis: TianguisWithDistance[] = [];
 
     for (const [day, items] of Object.entries(data)) {
       for (const item of items) {
@@ -190,6 +193,7 @@ export class TianguisService {
           day: day as DayOfWeek,
           lat: item.lat || 0, // Default to 0 if not provided
           lng: item.lng || 0, // Default to 0 if not provided
+          distance: 0 // Default to 0 if not provided
         });
       }
     }
@@ -202,9 +206,9 @@ export class TianguisService {
    * Search is accent-insensitive (e.g., "seccion" matches "Sección")
    */
   private static filterTianguis(
-    tianguis: Tianguis[],
+    tianguis: TianguisWithDistance[],
     query: TianguisQuery
-  ): Tianguis[] {
+  ): TianguisWithDistance[] {
     let filtered = tianguis;
 
     if (query.day) {

@@ -35,6 +35,20 @@
       </button>
 
       <div class="mt-4">
+        <label class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Filtrar por municipio</label>
+        <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <button v-for="municipality in municipalities" :key="municipality.value"
+            @click="toggleMunicipalityFilter(municipality.value)"
+            class="px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors" :class="selectedMunicipalities.includes(municipality.value)
+              ? 'bg-blue-600 dark:bg-blue-600 text-white'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-transparent dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700'
+              ">
+            {{ municipality.label }}
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4">
         <label class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Filtrar por día</label>
         <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           <button v-for="day in days" :key="day.value" @click="toggleDayFilter(day.value)"
@@ -89,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import type { TianguisWithDistance, DayOfWeek } from '../../types/tianguis.ts';
 import { getUserLocation, calculateDistance } from '../../utils/geolocation.ts';
 import { normalizeForSearch } from '../../utils/text.ts';
@@ -103,6 +117,7 @@ const isLoadingLocation = ref(false);
 const errorMessage = ref('');
 const userLocation = ref<{ lat: number; lng: number } | null>(null);
 const selectedDays = ref<DayOfWeek[]>([]);
+const selectedMunicipalities = ref<string[]>([]);
 
 const days = [
   { value: 'lunes' as DayOfWeek, label: 'Lun' },
@@ -114,11 +129,17 @@ const days = [
   { value: 'domingo' as DayOfWeek, label: 'Dom' },
 ];
 
-function getTodayDayOfWeek(): DayOfWeek {
-  const dayIndex = new Date().getDay();
-  const dayMap: DayOfWeek[] = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
-  return dayMap[dayIndex];
-}
+const municipalities = [
+  { value: 'guadalajara', label: 'Guadalajara' },
+  { value: 'zapopan', label: 'Zapopan' },
+  // { value: 'tlaquepaque', label: 'Tlaquepaque' },
+  // { value: 'tonala', label: 'Tonala' },
+  // { value: 'tlajomulco', label: 'Tlajomulco' },
+  // { value: 'el salto', label: 'El Salto' },
+  // { value: 'ixtlahuacan', label: 'Ixtlahuacan' },
+  // { value: 'juanacatlan', label: 'Juanacatlan' },
+  // { value: 'zapotlanejo', label: 'Zapotlanejo' },
+];
 
 const resultsTitle = computed(() => {
   if (userLocation.value) {
@@ -158,6 +179,9 @@ const filteredTianguis = computed(() => {
   if (selectedDays.value.length > 0) {
     results = results.filter((t) => selectedDays.value.includes(t.day));
   }
+  if (selectedMunicipalities.value.length > 0) {
+    results = results.filter((t) => selectedMunicipalities.value.includes(t.municipality));
+  }
 
   if (results.some((t) => t.distance !== undefined)) {
     results.sort((a, b) => (a.distance || Infinity) - (b.distance || Infinity));
@@ -172,6 +196,15 @@ function toggleDayFilter(day: DayOfWeek) {
     selectedDays.value.splice(index, 1);
   } else {
     selectedDays.value.push(day);
+  }
+}
+
+function toggleMunicipalityFilter(municipality: string) {
+  const index = selectedMunicipalities.value.indexOf(municipality);
+  if (index > -1) {
+    selectedMunicipalities.value.splice(index, 1);
+  } else {
+    selectedMunicipalities.value.push(municipality);
   }
 }
 
@@ -198,13 +231,19 @@ async function findNearby() {
 function handleSearch() { }
 
 onMounted(async () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('q')) searchQuery.value = params.get('q')!;
+  if (params.get('days')) {
+    selectedDays.value.splice(0, selectedDays.value.length, ...params.get('days')!.split(',') as DayOfWeek[]);
+  }
+  if (params.get('municipalities')) {
+    selectedMunicipalities.value.splice(0, selectedMunicipalities.value.length, ...params.get('municipalities')!.split(','));
+  }
   try {
     const response = await fetch('/api/tianguis.json');
     const data = await response.json();
     allTianguis.value = data;
 
-    const today = getTodayDayOfWeek();
-    selectedDays.value = [today];
   } catch (error) {
     console.error('Error loading tianguis:', error);
     errorMessage.value = 'Error al cargar los tianguis';
@@ -213,6 +252,19 @@ onMounted(async () => {
   }
 
 });
+
+watch([searchQuery, selectedMunicipalities, selectedDays], () => {
+  // Clear location filter when user starts typing a search query
+  if (searchQuery.value) {
+    userLocation.value = null;
+  }
+  const params = new URLSearchParams();
+  if (searchQuery.value) params.set('q', searchQuery.value);
+  if (selectedDays.value.length) params.set('days', selectedDays.value.join(','));
+  if (selectedMunicipalities.value.length) params.set('municipalities', selectedMunicipalities.value.join(','));
+  window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+},
+{ deep: true });
 </script>
 
 <style scoped>

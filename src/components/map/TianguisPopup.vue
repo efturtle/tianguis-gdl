@@ -1,42 +1,51 @@
 <template>
   <div class="font-sans max-w-70 dark:bg-gray-900">
-    <h3 class="text-base font-bold text-gray-800 dark:text-gray-100 m-0 mb-3 pb-2 border-b-2 border-blue-500 dark:border-blue-400">
+    <h3
+      class="text-base font-bold text-gray-800 dark:text-gray-100 m-0 mb-3 pb-2 border-b-2 border-blue-500 dark:border-blue-400">
       {{ tianguis.name }}
     </h3>
-    
+
     <div class="text-[13px]">
       <p class="my-2 mb-3 text-gray-600 dark:text-gray-400 leading-relaxed">
         <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5">📍 Ubicación:</strong><br />
         {{ formatLocation(tianguis) }}
       </p>
-      
+
       <p class="my-2 text-gray-600 dark:text-gray-400 leading-relaxed">
-        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5">📅 Día:</strong> 
-        <span class="inline-block bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-300 px-2 py-0.5 rounded font-semibold text-xs ml-1">
+        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5">📅 Día:</strong>
+        <span
+          class="inline-block bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-300 px-2 py-0.5 rounded font-semibold text-xs ml-1">
           {{ capitalizeDay(tianguis.day) }}
         </span>
       </p>
-      
+
       <p class="my-2 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5 text-[13px]">🏙️ Municipio:</strong> 
+        <strong class="text-gray-800 dark:text-gray-300 inline-block mb-0.5 text-[13px]">🏙️ Municipio:</strong>
         {{ capitalizeMunicipality(tianguis.municipality) }}
       </p>
 
-      <a 
-        :href="getGoogleMapsUrl(tianguis)" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="mt-4 block w-full text-center bg-blue-50 hover:bg-blue-100 dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-600 dark:text-blue-400 font-semibold py-2 px-3 rounded-md transition-colors border border-blue-200 dark:border-gray-600 text-[13px]"
-      >
+      <a :href="getGoogleMapsUrl(tianguis)" target="_blank" rel="noopener noreferrer"
+        class="mt-4 block w-full text-center bg-blue-50 hover:bg-blue-100 dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-600 dark:text-blue-400 font-semibold py-2 px-3 rounded-md transition-colors border border-blue-200 dark:border-gray-600 text-[13px]">
         🗺️ Ver en Google Maps
       </a>
+
+      <div class="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+        <button @click="reportIssueUtil(tianguis)"
+          class="text-xs text-red-500 hover:text-red-700 dark:text-red-400 flex items-center gap-1 transition-colors">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          Reportar error en la información
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { DayOfWeek } from '../../types/tianguis';
-
+import { reportIssue as reportIssueUtil } from '../../utils/reportIssue';
 interface Props {
   tianguis: any;
 }
@@ -75,7 +84,7 @@ function capitalizeMunicipality(municipality: string): string {
 }
 
 // Generates a Google Maps search URL based on the location and municipality
-function getGoogleMapsUrl(tianguis: any): string {  
+function getGoogleMapsUrl(tianguis: any): string {
   const url = `https://www.google.com/maps/search/?api=1&query=${tianguis.lat},${tianguis.lng}`;
   return url;
 }

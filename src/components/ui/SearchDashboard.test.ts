@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import SearchDashboard from "./SearchDashboard.vue";
 
 // 1. Mock Child Components
-// We stub these so we are only testing the Dashboard's logic, not the children's HTML
 vi.mock("../tianguis/TianguisCard.vue", () => ({
   default: {
     template: '<div class="mock-tianguis-card">{{ tianguis.name }}</div>',
@@ -17,10 +16,9 @@ vi.mock("./DarkModeToggle.vue", () => ({
 // 2. Mock Utilities
 vi.mock("../../utils/geolocation", () => ({
   getUserLocation: vi.fn(() => Promise.resolve({ lat: 20.67, lng: -103.34 })),
-  calculateDistance: vi.fn(() => 5.2), // Always return 5.2km for testing
+  calculateDistance: vi.fn(() => 5.2),
 }));
 
-// Mock the text utility to ensure predictable search matching
 vi.mock("../../utils/text", () => ({
   normalizeForSearch: (text: string) => text.toLowerCase(),
   matchesSearch: (text: string, query: string) =>
@@ -32,7 +30,7 @@ describe("SearchDashboard.vue", () => {
     {
       name: "Tianguis del Sol",
       day: "lunes",
-      municipality: "Zapopan",
+      municipality: "zapopan",
       lat: 20.65,
       lng: -103.4,
       location: {
@@ -46,7 +44,7 @@ describe("SearchDashboard.vue", () => {
     {
       name: "Tianguis de Santa Tere",
       day: "martes",
-      municipality: "Guadalajara",
+      municipality: "guadalajara",
       lat: 20.68,
       lng: -103.36,
       location: {
@@ -60,7 +58,7 @@ describe("SearchDashboard.vue", () => {
     {
       name: "Tianguis 5 de Mayo",
       day: "lunes",
-      municipality: "Guadalajara",
+      municipality: "guadalajara",
       lat: 20.67,
       lng: -103.34,
       location: {
@@ -73,92 +71,144 @@ describe("SearchDashboard.vue", () => {
     },
   ];
 
+  let originalLocation: Location;
+  let originalHistory: History;
+
   beforeEach(() => {
-    // 3. Mock the global fetch API to return our dummy data
+    // Mock the global fetch API to return our dummy data
     globalThis.fetch = vi.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve(mockApiData),
       }),
     ) as any;
 
-    // 4. Mock Date to always return Monday (day index 1)
-    vi.useFakeTimers();
+    // Mock window location and history for URL param testing
+    originalLocation = window.location;
+    originalHistory = window.history;
 
-    // FIX: Use the comma-separated constructor to force local time (Year, Month Index, Day, Hour)
-    // Month is 0-indexed, so 0 = January. We set it to 12:00 PM to be perfectly safe from timezone shifts.
-    vi.setSystemTime(new Date(2024, 0, 1, 12, 0, 0));
+    Object.defineProperty(window, "location", {
+      value: { search: "", pathname: "/search" },
+      writable: true,
+    });
+
+    Object.defineProperty(window, "history", {
+      value: { replaceState: vi.fn() },
+      writable: true,
+    });
   });
 
-  it("fetches data on mount and sets the default day to today", async () => {
-    const wrapper = mount(SearchDashboard);
+  afterEach(() => {
+    // Restore window objects
+    window.location.href = originalLocation.href;
+    window.history = originalHistory;
+    vi.clearAllMocks();
+  });
 
-    // Wait for the onMounted async fetch to complete
+  it("loads without default filters and shows all tianguis", async () => {
+    const wrapper = mount(SearchDashboard);
     await flushPromises();
 
-    expect(globalThis.fetch).toHaveBeenCalledWith("/api/tianguis.json");
-
-    // Because we set the date to Monday (2024-01-01),
-    // it should only render the two monday tianguis by default
     const cards = wrapper.findAll(".mock-tianguis-card");
-    expect(cards).toHaveLength(2);
-    expect(wrapper.text()).toContain("Tianguis del Sol");
-    expect(wrapper.text()).toContain("Tianguis 5 de Mayo");
-    expect(wrapper.text()).not.toContain("Tianguis de Santa Tere"); // Martes should be hidden
+    expect(cards).toHaveLength(3); // Should show all since no day is selected by default now
   });
 
   it("toggles day filters correctly", async () => {
     const wrapper = mount(SearchDashboard);
     await flushPromises();
 
-    // Find the button for "Martes" (assuming you generate these buttons in the template)
-    // Adjust the selector based on your actual template classes/content
+    // Find and click the button for "Martes"
     const martesButton = wrapper
       .findAll("button")
-      .find((b) => b.text().includes("Mar") || b.text().includes("Martes"));
-
-    // Click to add Tuesday to the filter
+      .find((b) => b.text().includes("Mar"));
     await martesButton?.trigger("click");
 
-    // Now both Lunes and Martes tianguis should be visible
+    // Only Santa Tere (Martes) should be visible
     const cards = wrapper.findAll(".mock-tianguis-card");
-    expect(cards).toHaveLength(3);
+    expect(cards).toHaveLength(1);
+    expect(wrapper.text()).toContain("Tianguis de Santa Tere");
+  });
+
+  it("toggles municipality filters correctly", async () => {
+    const wrapper = mount(SearchDashboard);
+    await flushPromises();
+
+    // Find and click the button for "Zapopan"
+    const zapopanBtn = wrapper
+      .findAll("button")
+      .find((b) => b.text().includes("Zapopan"));
+    await zapopanBtn?.trigger("click");
+
+    // Only Tianguis del Sol (Zapopan) should be visible
+    const cards = wrapper.findAll(".mock-tianguis-card");
+    expect(cards).toHaveLength(1);
+    expect(wrapper.text()).toContain("Tianguis del Sol");
   });
 
   it("filters tianguis by search query", async () => {
     const wrapper = mount(SearchDashboard);
     await flushPromises();
 
-    // Find the search input and type into it
     const searchInput = wrapper.find('input[type="text"]');
-    await searchInput.setValue("sol"); // Search for "Tianguis del Sol"
+    await searchInput.setValue("sol");
 
-    // Only one tianguis should match the text "sol" AND the default day "lunes"
     const cards = wrapper.findAll(".mock-tianguis-card");
     expect(cards).toHaveLength(1);
     expect(wrapper.text()).toContain("Tianguis del Sol");
   });
 
-  it('requests user location and calculates distances when clicking "find nearby"', async () => {
+  it("initializes state from URL parameters", async () => {
+    // Pre-fill URL before mounting
+    window.location.search = "?q=mayo&days=lunes&municipalities=guadalajara";
+
     const wrapper = mount(SearchDashboard);
     await flushPromises();
 
-    // Find and click the geolocation button (the one that triggers findNearby)
-    // We'll target it by looking for the SVG or a specific class.
-    // Adjust the selector if your button has a specific class like .btn-location
+    // Check if input was populated
+    const input = wrapper.find('input[type="text"]')
+      .element as HTMLInputElement;
+    expect(input.value).toBe("mayo");
+
+    // Check if the filtering applied (should only match 5 de Mayo)
+    const cards = wrapper.findAll(".mock-tianguis-card");
+    expect(cards).toHaveLength(1);
+    expect(wrapper.text()).toContain("Tianguis 5 de Mayo");
+  });
+
+  it("updates URL parameters when filters change", async () => {
+    const wrapper = mount(SearchDashboard);
+    await flushPromises();
+
+    // Type in the search box
+    const searchInput = wrapper.find('input[type="text"]');
+    await searchInput.setValue("santa");
+
+    // Click a municipality
+    const zapopanBtn = wrapper
+      .findAll("button")
+      .find((b) => b.text().includes("Zapopan"));
+    await zapopanBtn?.trigger("click");
+
+    await wrapper.vm.$nextTick(); // Wait for watcher to trigger
+
+    // Verify history.replaceState was called with the updated params
+    expect(window.history.replaceState).toHaveBeenCalled();
+    const lastCall = vi.mocked(window.history.replaceState).mock.calls.pop();
+    expect(lastCall?.[2]).toContain("q=santa");
+    expect(lastCall?.[2]).toContain("municipalities=zapopan");
+  });
+
+  it("requests user location and calculates distances", async () => {
+    const wrapper = mount(SearchDashboard);
+    await flushPromises();
+
     const locationButton = wrapper
       .findAll("button")
-      .find((b) => b.html().includes("svg") && !b.html().includes("Dark Mode"));
-
+      .find((b) => b.text().includes("Usar mi ubicación"));
     await locationButton?.trigger("click");
-    await flushPromises(); // Wait for the getUserLocation promise to resolve
+    await flushPromises();
 
-    // Verify our geolocation mock was triggered
     const geolocationModule = await import("../../utils/geolocation");
     expect(geolocationModule.getUserLocation).toHaveBeenCalledOnce();
-
-    // Check if the component successfully calculated distance (our mock returns 5.2)
-    // We can verify this by checking if the internal state updated, or if the view changed.
-    // If you pass the distance prop down to TianguisCard, the view will re-render.
     expect(geolocationModule.calculateDistance).toHaveBeenCalled();
   });
 });
