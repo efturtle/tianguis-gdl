@@ -3,6 +3,26 @@ import Base from '../layouts/base.astro';
 import Sidebar from '../components/ui/Sidebar.astro';
 import SearchDashboard from '../components/ui/SearchDashboard.vue';
 import Map from '../components/map/Map.vue';
+import { TianguisService } from '../services/tianguis';
+
+// Get filtered tianguis for this municipality and day
+const tianguis = await TianguisService.getTianguis({ 
+  state: 'jalisco'
+});
+
+// Prepare data for map
+const tianguisData = tianguis.map(t => ({
+  name: t.name,
+  lat: t.lat,
+  lng: t.lng,
+  day: t.day,
+  municipality: t.municipality,
+  state: t.state,
+  location: t.location,
+  direccion: t.location.type === 'address' ? t.location.direccion : null,
+  street1: t.location.type === 'streets' ? t.location.street1 : null,
+  street2: t.location.type === 'streets' ? t.location.street2 : null,
+}));
 ---
 
 <Base title="Tianguis GDL - Encuentra tianguis cerca de ti">
@@ -57,8 +77,8 @@ import Map from '../components/map/Map.vue';
                     </div>
                 </div>
             </div>
-            <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
-                <Map tianguis={[]} client:only="vue" />
+            <div class="hidden md:flex flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
+                <Map tianguis={tianguisData} client:only="vue" />
             </div>
         </div>
     </div>
