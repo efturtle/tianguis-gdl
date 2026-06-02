@@ -37,9 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { Tianguis, DayOfWeek } from '../../types/tianguis';
-import { formatDistance as formatDistanceUtil } from '../../utils/geolocation';
+import { formatDistance as formatDistance } from '../../utils/geolocation';
 
 interface TianguisWithDistance extends Tianguis {
   distance?: number;
@@ -49,18 +48,28 @@ const props = defineProps<{
   tianguis: TianguisWithDistance;
 }>();
 
-// NEW: Check if screen is Desktop (Tailwind 'md' breakpoint = 768px)
-const isDesktop = computed(() => {
-  if (typeof window === 'undefined') return false;
-  return window.innerWidth >= 768;
-});
+function getDayLabel(day: DayOfWeek) {
+  const days: Record<DayOfWeek, string> = {
+    lunes: 'Lunes', martes: 'Martes', miercoles: 'Miércoles',
+    jueves: 'Jueves', viernes: 'Viernes', sabado: 'Sábado', domingo: 'Domingo'
+  };
+  return days[day] || day;
+}
 
-// NEW: Smart click handler
+function formatLocation(location: any) {
+  if (location.type === 'address') return location.direccion;
+  if (location.type === 'streets') return `${location.street1} / ${location.street2}`;
+  return 'Ubicación no disponible';
+}
+
 function handleMapClick(event: MouseEvent) {
-  if (isDesktop.value) {
-    // On Desktop: Prevent navigation and tell Map.vue to pan to these coordinates
+  // Measure the screen width RIGHT NOW, not when the page loaded
+  const isCurrentlyDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+
+  if (isCurrentlyDesktop) {
+    // We are actually on Desktop: prevent URL navigation and talk to the side-by-side map
     event.preventDefault();
-    debugger;
+
     const focusEvent = new CustomEvent('tianguis:focus-map', {
       detail: {
         lat: props.tianguis.lat,
@@ -70,31 +79,5 @@ function handleMapClick(event: MouseEvent) {
     });
     window.dispatchEvent(focusEvent);
   }
-  // On Mobile: Do nothing, let the <a> tag naturally navigate to the mobile map page
-}
-
-function formatLocation(location: Tianguis['location']): string {
-  if (location.type === 'streets') {
-    return `${location.street1} / ${location.street2}`;
-  }
-  return location.direccion;
-}
-
-function getDayLabel(day: DayOfWeek): string {
-  const dayMap = {
-    lunes: 'Lunes',
-    martes: 'Martes',
-    miercoles: 'Miércoles',
-    jueves: 'Jueves',
-    viernes: 'Viernes',
-    sabado: 'Sábado',
-    domingo: 'Domingo',
-  };
-  return dayMap[day];
-}
-
-function formatDistance(distance: number | undefined): string {
-  if (distance === undefined) return '';
-  return formatDistanceUtil(distance);
 }
 </script>
