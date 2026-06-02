@@ -79,34 +79,8 @@ const dayName = days.find((d) => d.slug === day.slug)?.name || day.slug;
       </div>
     </div>
 
-    <div class="flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
+    <div class="hidden md:block flex-1 min-h-0 rounded-2xl overflow-hidden shadow-md">
       <Map tianguis={tianguisData} client:only="vue" initialZoom={13} />
     </div>
   </div>
 </WithSidebar>
-
-<script>
-  // Check if viewport is mobile (< 768px based on Tailwind's md breakpoint)
-  function isMobile() {
-    return window.innerWidth < 768;
-  }
-
-  // Redirect to home if mobile
-  function checkAndRedirect() {
-    if (isMobile()) {
-      window.location.href = '/';
-    }
-  }
-
-  // Check on initial load
-  checkAndRedirect();
-
-  // Listen for resize events with debouncing
-  let resizeTimer: number;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      checkAndRedirect();
-    }, 250);
-  });
-</script>
