@@ -25,63 +25,64 @@ vi.mock("../../utils/text", () => ({
     text.toLowerCase().includes(query.toLowerCase()),
 }));
 
+// 3. Mock TianguisService
+const mockApiData = [
+  {
+    name: "Tianguis del Sol",
+    day: "lunes",
+    municipality: "zapopan",
+    lat: 20.65,
+    lng: -103.4,
+    location: {
+      type: "streets",
+      street1: "A",
+      street2: "B",
+      street3: "",
+      street4: "",
+    },
+  },
+  {
+    name: "Tianguis de Santa Tere",
+    day: "martes",
+    municipality: "guadalajara",
+    lat: 20.68,
+    lng: -103.36,
+    location: {
+      type: "streets",
+      street1: "C",
+      street2: "D",
+      street3: "",
+      street4: "",
+    },
+  },
+  {
+    name: "Tianguis 5 de Mayo",
+    day: "lunes",
+    municipality: "guadalajara",
+    lat: 20.67,
+    lng: -103.34,
+    location: {
+      type: "streets",
+      street1: "E",
+      street2: "F",
+      street3: "",
+      street4: "",
+    },
+  },
+];
+
+vi.mock("../../services/tianguis", () => ({
+  TianguisService: {
+    getTianguis: vi.fn(() => Promise.resolve(mockApiData)),
+  },
+}));
+
 describe("SearchDashboard.vue", () => {
-  const mockApiData = [
-    {
-      name: "Tianguis del Sol",
-      day: "lunes",
-      municipality: "zapopan",
-      lat: 20.65,
-      lng: -103.4,
-      location: {
-        type: "streets",
-        street1: "A",
-        street2: "B",
-        street3: "",
-        street4: "",
-      },
-    },
-    {
-      name: "Tianguis de Santa Tere",
-      day: "martes",
-      municipality: "guadalajara",
-      lat: 20.68,
-      lng: -103.36,
-      location: {
-        type: "streets",
-        street1: "C",
-        street2: "D",
-        street3: "",
-        street4: "",
-      },
-    },
-    {
-      name: "Tianguis 5 de Mayo",
-      day: "lunes",
-      municipality: "guadalajara",
-      lat: 20.67,
-      lng: -103.34,
-      location: {
-        type: "streets",
-        street1: "E",
-        street2: "F",
-        street3: "",
-        street4: "",
-      },
-    },
-  ];
 
   let originalLocation: Location;
   let originalHistory: History;
 
   beforeEach(() => {
-    // Mock the global fetch API to return our dummy data
-    globalThis.fetch = vi.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(mockApiData),
-      }),
-    ) as any;
-
     // Mock window location and history for URL param testing
     originalLocation = window.location;
     originalHistory = window.history;

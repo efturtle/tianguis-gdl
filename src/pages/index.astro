@@ -33,7 +33,7 @@ const tianguisData = tianguis.map(t => ({
         
         <div class="block md:hidden flex-1 min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
             <div>
-                <SearchDashboard client:only="vue" />
+                <SearchDashboard client:only="vue" initialTianguis={tianguisData} />
             </div>
 
             <div class="py-6 md:hidden">

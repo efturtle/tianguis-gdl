@@ -107,6 +107,7 @@ import { ref, computed, onMounted, watch } from 'vue';
 import type { TianguisWithDistance, DayOfWeek } from '../../types/tianguis.ts';
 import { getUserLocation, calculateDistance } from '../../utils/geolocation.ts';
 import { normalizeForSearch } from '../../utils/text.ts';
+import { TianguisService } from '../../services/tianguis.ts';
 import DarkModeToggle from './../ui/DarkModeToggle.vue';
 import TianguisCard from './../tianguis/TianguisCard.vue';
 
@@ -231,6 +232,17 @@ async function findNearby() {
 function handleSearch() { }
 
 onMounted(async () => {
+  try {
+    // Load all tianguis from local data or API
+    allTianguis.value = await TianguisService.getTianguis({ state: 'jalisco' });
+  } catch (error) {
+    console.error('Error loading tianguis:', error);
+    errorMessage.value = 'Error al cargar los tianguis';
+  } finally {
+    isLoading.value = false;
+  }
+
+  // Load filters from URL parameters
   const params = new URLSearchParams(window.location.search);
   if (params.get('q')) searchQuery.value = params.get('q')!;
   if (params.get('days')) {
@@ -239,18 +251,6 @@ onMounted(async () => {
   if (params.get('municipalities')) {
     selectedMunicipalities.value.splice(0, selectedMunicipalities.value.length, ...params.get('municipalities')!.split(','));
   }
-  try {
-    const response = await fetch('/api/tianguis.json');
-    const data = await response.json();
-    allTianguis.value = data;
-
-  } catch (error) {
-    console.error('Error loading tianguis:', error);
-    errorMessage.value = 'Error al cargar los tianguis';
-  } finally {
-    isLoading.value = false;
-  }
-
 });
 
 watch([searchQuery, selectedMunicipalities, selectedDays], () => {
@@ -264,7 +264,7 @@ watch([searchQuery, selectedMunicipalities, selectedDays], () => {
   if (selectedMunicipalities.value.length) params.set('municipalities', selectedMunicipalities.value.join(','));
   window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
 },
-{ deep: true });
+  { deep: true });
 </script>
 
 <style scoped>
