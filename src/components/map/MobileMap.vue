@@ -37,13 +37,15 @@
         <mgl-geolocate-control position="top-right" @geolocate="onGeolocate" />
 
         <mgl-marker v-for="tianguis in displayedTianguis" :key="`${tianguis.name}-${tianguis.lat}-${tianguis.lng}`"
-          :coordinates="[tianguis.lng, tianguis.lat]">
+          :coordinates="[tianguis.lng, tianguis.lat]"
+          :color="getMarkerColor(tianguis.day)">
           <mgl-popup :offset="25">
             <TianguisPopup :tianguis="tianguis" />
           </mgl-popup>
         </mgl-marker>
 
-        <mgl-marker v-if="selectedTianguis" :coordinates="[selectedTianguis.lng, selectedTianguis.lat]">
+        <mgl-marker v-if="selectedTianguis" :coordinates="[selectedTianguis.lng, selectedTianguis.lat]"
+          :color="getMarkerColor(selectedTianguis.day)">
           <mgl-popup :offset="25">
             <TianguisPopup :tianguis="selectedTianguis" />
           </mgl-popup>
@@ -65,6 +67,7 @@ import {
   MglPopup,
 } from '@indoorequal/vue-maplibre-gl';
 import { calculateDistance, getUserLocation } from '../../utils/geolocation';
+import { getMarkerColor } from '../../utils/mapUtils';
 import type { TianguisWithDistance } from '../../types/tianguis';
 import TianguisPopup from './TianguisPopup.vue';
 import DarkModeToggle from './../ui/DarkModeToggle.vue';

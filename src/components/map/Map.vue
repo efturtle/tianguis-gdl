@@ -15,6 +15,7 @@
       v-for="(tianguis, index) in tianguisWithCoords"
       :key="`${tianguis.name}-${index}`"
       :coordinates="[tianguis.lng, tianguis.lat]"
+      :color="getMarkerColor(tianguis.day)"
     >
       <mgl-popup :offset="25">
         <TianguisPopup :tianguis="tianguis" />
@@ -34,6 +35,7 @@ import {
 } from '@indoorequal/vue-maplibre-gl';
 import { computed, onMounted, onUnmounted, watch, ref } from 'vue';
 import TianguisPopup from './TianguisPopup.vue';
+import { getMarkerColor } from '../../utils/mapUtils';
 import type { Tianguis } from '../../types/tianguis';
 
 // Disable automatic attribute inheritance to prevent warnings with MglMap

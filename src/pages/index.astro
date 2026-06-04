@@ -3,6 +3,7 @@ import Base from '../layouts/base.astro';
 import Sidebar from '../components/ui/Sidebar.astro';
 import SearchDashboard from '../components/ui/SearchDashboard.vue';
 import Map from '../components/map/Map.vue';
+import MobileMapView from '../components/ui/MobileMapView.vue';
 import { TianguisService } from '../services/tianguis';
 
 // Get filtered tianguis for this municipality and day
@@ -31,23 +32,8 @@ const tianguisData = tianguis.map(t => ({
             <Sidebar />
         </div>
         
-        <div class="block md:hidden flex-1 min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
-            <div>
-                <SearchDashboard client:only="vue" initialTianguis={tianguisData} />
-            </div>
-
-            <div class="py-6 md:hidden">
-                <div class="max-w-3xl mx-auto px-4 sm:px-6">
-                    <div class="flex flex-col gap-3">
-                        <a href="/mapa" class="flex items-center gap-3 py-3.5 px-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-blue-500 dark:text-blue-400 font-medium transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 dark:hover:bg-blue-900/30 dark:hover:border-blue-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                            </svg>
-                            <span>Ver mapa completo</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="block md:hidden flex-1 min-h-screen">
+            <MobileMapView client:only="vue" tianguis={tianguisData} />
         </div>
 
         <div class="hidden md:flex flex-1 gap-6 h-screen p-8 overflow-hidden">
