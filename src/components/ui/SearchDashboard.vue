@@ -232,16 +232,6 @@ async function findNearby() {
 function handleSearch() { }
 
 onMounted(async () => {
-  try {
-    // Load all tianguis from local data or API
-    allTianguis.value = await TianguisService.getTianguis({ state: 'jalisco' });
-  } catch (error) {
-    console.error('Error loading tianguis:', error);
-    errorMessage.value = 'Error al cargar los tianguis';
-  } finally {
-    isLoading.value = false;
-  }
-
   // Load filters from URL parameters
   const params = new URLSearchParams(window.location.search);
   if (params.get('q')) searchQuery.value = params.get('q')!;

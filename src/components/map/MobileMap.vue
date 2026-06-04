@@ -188,7 +188,6 @@ function onGeolocate(event: any) {
 
 // Lifecycle Hooks
 onMounted(() => {
-  console.log('MobileMap mounted with tianguis:', props.tianguis);  
   updateTheme();
 
   observer = new MutationObserver(() => {

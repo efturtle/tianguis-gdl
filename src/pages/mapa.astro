@@ -3,11 +3,13 @@ import Base from '../layouts/base.astro';
 import MobileMap from '../components/map/MobileMap.vue';
 import { TianguisService } from '../services/tianguis';
 
-// Get all tianguis from both municipalities for the map
-const allTianguis = await TianguisService.getTianguis({ state: 'jalisco' });
+// Get filtered tianguis for this municipality and day
+const tianguis = await TianguisService.getTianguis({ 
+  state: 'jalisco'
+});
 
-// Pass as props (Astro will serialize to JSON)
-const tianguisData = allTianguis.map(t => ({
+// Prepare data for map
+const tianguisData = tianguis.map(t => ({
   name: t.name,
   lat: t.lat,
   lng: t.lng,
@@ -15,13 +17,10 @@ const tianguisData = allTianguis.map(t => ({
   municipality: t.municipality,
   state: t.state,
   location: t.location,
-  distance: 0,
-  // Flatten location for easier access
+  distance: t.distance,
   direccion: t.location.type === 'address' ? t.location.direccion : null,
   street1: t.location.type === 'streets' ? t.location.street1 : null,
   street2: t.location.type === 'streets' ? t.location.street2 : null,
-  street3: t.location.type === 'streets' ? t.location.street3 : null,
-  street4: t.location.type === 'streets' ? t.location.street4 : null,
 }));
 
 const pageTitle = 'Mapa de Tianguis - Tianguis GDL';
