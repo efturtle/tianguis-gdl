@@ -28,6 +28,7 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.10",
     "jsdom": "^29.1.1",
+    "rollup-plugin-visualizer": "^7.0.1",
     "sass-embedded": "^1.100.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.7"

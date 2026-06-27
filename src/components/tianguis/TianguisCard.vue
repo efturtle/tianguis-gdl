@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <a :href="`/mapa?lat=${tianguis.lat}&lng=${tianguis.lng}`" @click="handleMapClick"
+    <a :href="onMapClick ? '#' : `/mapa?lat=${tianguis.lat}&lng=${tianguis.lng}`" @click="handleMapClick"
       class="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium">
       <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -37,15 +37,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Tianguis, DayOfWeek } from '../../types/tianguis';
+import type { Tianguis, DayOfWeek, TianguisWithDistance } from '../../types/tianguis';
 import { formatDistance as formatDistance } from '../../utils/geolocation';
-
-interface TianguisWithDistance extends Tianguis {
-  distance?: number;
-}
 
 const props = defineProps<{
   tianguis: TianguisWithDistance;
+  onMapClick?: (tianguis: TianguisWithDistance) => void;
 }>();
 
 function getDayLabel(day: DayOfWeek) {
@@ -63,6 +60,13 @@ function formatLocation(location: any) {
 }
 
 function handleMapClick(event: MouseEvent) {
+  // If custom handler provided, use it
+  if (props.onMapClick) {
+    event.preventDefault();
+    props.onMapClick(props.tianguis);
+    return;
+  }
+
   // Measure the screen width RIGHT NOW, not when the page loaded
   const isCurrentlyDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
 
